@@ -105,6 +105,9 @@ export function getSearchStatus() {
   return compose(fromSearch.getStatus(), getSearchState());
 }
 
+export function getSearchQuery() {
+  return compose(fromSearch.getQuery(), getSearchState());
+}
 
 /**
  * Just like with the search selectors, we also have to compose the book

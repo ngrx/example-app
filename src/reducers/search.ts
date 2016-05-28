@@ -10,12 +10,14 @@ import { BookActions } from '../actions/book';
 export interface SearchState {
   ids: string[];
   loading: boolean;
+  query: string;
   entities: { [id: string]: Book };
 };
 
 const initialState: SearchState = {
   ids: [],
   loading: false,
+  query: '',
   entities: {}
 };
 
@@ -23,6 +25,7 @@ export default function(state = initialState, { type, payload }: Action): Search
   switch (type) {
     case BookActions.SEARCH:
       return Object.assign(state, {
+        query: payload,
         loading: true
       });
 
@@ -30,6 +33,7 @@ export default function(state = initialState, { type, payload }: Action): Search
       return {
         ids: (payload as Book[]).map(book => book.id),
         loading: false,
+        query: state.query,
         entities: (payload as Book[]).reduce((entities: { [id: string]: Book }, book: Book) => {
           return Object.assign(entities, {
             [book.id]: book
@@ -50,4 +54,9 @@ export function getStatus() {
 export function getResults() {
   return (state$: Observable<SearchState>) => state$
     .map(({ ids, entities }) => ids.map(id => entities[id]));
-};
+}
+
+export function getQuery() {
+  return (state$: Observable<SearchState>) => state$
+    .select(s => s.query);
+}

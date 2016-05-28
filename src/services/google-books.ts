@@ -14,10 +14,10 @@ export interface Book {
     description: string;
     averageRating: number;
     ratingsCount: number;
-  };
-  imageLinks: {
-    thumbnail: string;
-    smallThumbnail: string;
+    imageLinks: {
+      thumbnail: string;
+      smallThumbnail: string;
+    };
   };
 }
 
