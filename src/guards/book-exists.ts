@@ -10,6 +10,13 @@ import { GoogleBooksService } from '../services/google-books';
 import { AppState, getBook, getCollectionLoaded } from '../reducers';
 import { BookActions } from '../actions/book';
 
+
+/**
+ * Guards are hooks into the route resolution process, providing an opportunity to inform 
+ * the router's traversal process whether the route should continue to be considered a candidate route.
+ * Guards must return an observable of true or false.
+ * More on guards: https://github.com/ngrx/router/blob/master/docs/overview/guards.md
+ */
 @Injectable()
 export class BookExistsGuard implements Guard {
   constructor(

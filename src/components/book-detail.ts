@@ -45,6 +45,13 @@ export type RemoveOutput = Book;
   `]
 })
 export class BookDetailComponent {
+  /**
+   * Dumb components receieve data through @Input() and communicate events through @Output()
+   * but generally maintain no internal state of their own. All decisions are delegated to 'container',
+   * or 'smart' components before data updates flow back down.
+   *
+   * Tip: Utilize getters to keep templates clean in 'dumb' components.
+   */
   @Input() book: BookInput;
   @Input() inCollection: InCollectionInput;
   @Output() add = new Subject<AddOutput>();

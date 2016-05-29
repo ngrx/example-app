@@ -13,6 +13,16 @@ import { GoogleBooksService } from '../services/google-books';
 import { BookActions } from '../actions/book';
 import { Book } from '../models';
 
+@Injectable()
+export class BookEffects {
+  constructor(
+    private updates$: StateUpdates<AppState>,
+    private googleBooks: GoogleBooksService,
+    private db: Database,
+    private bookActions: BookActions
+  ) {
+    db.open('books_app').subscribe();
+  }
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your application.
@@ -25,18 +35,6 @@ import { Book } from '../models';
  * Official Docs: http://reactivex.io/rxjs/manual/overview.html#categories-of-operators
  * RxJS 5 Operators By Example: https://gist.github.com/btroncone/d6cf141d6f2c00dc6b35
  */
-
-@Injectable()
-export class BookEffects {
-  constructor(
-    private updates$: StateUpdates<AppState>,
-    private googleBooks: GoogleBooksService,
-    private db: Database,
-    private bookActions: BookActions
-  ) {
-    db.open('books_app').subscribe();
-  }
-
   @Effect() loadCollectionOnInit$ = Observable.of(this.bookActions.loadCollection());
 
   @Effect() loadCollection$ = this.updates$
