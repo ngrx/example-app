@@ -70,3 +70,8 @@ export function getBook(id: string) {
   return (state$: Observable<BooksState>) => state$
     .select(s => s.entities[id]);
 }
+
+export function hasBook(id: string) {
+  return (state$: Observable<BooksState>) => state$
+    .select(s => s.ids.includes(id));
+}

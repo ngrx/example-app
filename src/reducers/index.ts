@@ -112,6 +112,10 @@ export default compose(storeLogger(), combineReducers)({
    return compose(fromBooks.getBook(id), getBooksState());
  }
 
+ export function hasBook(id: string) {
+   return compose(fromBooks.hasBook(id), getBooksState());
+ }
+
 
 /**
  * Just like with the books selectors, we also have to compose the search
