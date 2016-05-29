@@ -20,7 +20,17 @@ export type BookInput = Book;
         <li *ngFor="let author of authors">{{ author }}</li>
       </ul>
     </div>
-  `
+  `,
+  styles: [`
+    :host {
+      display: block;
+      width: 300px;
+      padding: 20px;
+      border: 1px solid black;
+      margin: 10px;
+      cursor: pointer;
+    }
+  `]
 })
 export class BookPreviewComponent {
   @Input() book: BookInput;
