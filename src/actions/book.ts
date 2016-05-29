@@ -2,6 +2,14 @@ import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Book } from '../models';
 
+/**
+ * Instead of passing around action string constants and manually
+ * recreating action objects at the point of dispatch, we create
+ * services encapsulating each appropriate action group. Action types
+ * are included as static members and kept next to their action creator.
+ * This promotes a uniform interface and single import for appropriate actions
+ * within your application components.
+ */
 export class BookActions {
   static SEARCH = '[Book] Search';
   search(query: string): Action {
