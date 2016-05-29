@@ -1,5 +1,6 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 
 /**

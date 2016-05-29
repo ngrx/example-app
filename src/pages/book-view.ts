@@ -1,6 +1,5 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/share';
 import { Component } from '@angular/core';
 import { RouteParams } from '@ngrx/router';
 import { Store } from '@ngrx/store';

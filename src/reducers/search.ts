@@ -1,4 +1,3 @@
-import 'rxjs/add/operator/map';
 import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';

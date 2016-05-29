@@ -1,9 +1,10 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Component, Output, Input, OnInit } from '@angular/core';
+import { Component, Output, Input } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+
 
 export type QueryInput = string;
 export type SearchOutput = string;
@@ -15,6 +16,10 @@ export type SearchOutput = string;
   `
 })
 export class BookSearchComponent {
+  /**
+   * Tip: Push events into a subject if you want to treat event streams
+   * as observables.
+   */
   keyup$ = new Subject<KeyboardEvent>();
 
   @Input() query: QueryInput = '';

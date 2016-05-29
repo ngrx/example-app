@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { Book } from '../models';
 
+
 export type BookInput = Book;
 
 @Component({

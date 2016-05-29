@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 
 import { BookPreviewComponent, BookInput } from './book-preview';
+
 
 export type BooksInput = BookInput[];
 

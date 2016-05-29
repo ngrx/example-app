@@ -1,7 +1,7 @@
-import { Component, Input, Output } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Book } from '../models';
+
 
 export type BookInput = Book;
 export type InCollectionInput = boolean;
@@ -14,11 +14,11 @@ export type RemoveOutput = Book;
     <h3>{{ title }}</h3>
     <h4 *ngIf="subtitle">{{ subtitle }}</h4>
 
-    <button *ngIf="inCollection" (click)="remove.next(book)">
+    <button *ngIf="inCollection" (click)="remove.emit(book)">
       Remove Book from Collection
     </button>
 
-    <button *ngIf="!inCollection" (click)="add.next(book)">
+    <button *ngIf="!inCollection" (click)="add.emit(book)">
       Add Book to Collection
     </button>
 
@@ -54,8 +54,8 @@ export class BookDetailComponent {
    */
   @Input() book: BookInput;
   @Input() inCollection: InCollectionInput;
-  @Output() add = new Subject<AddOutput>();
-  @Output() remove = new Subject<RemoveOutput>();
+  @Output() add = new EventEmitter<AddOutput>();
+  @Output() remove = new EventEmitter<RemoveOutput>();
 
   get id() {
     return this.book.id;
