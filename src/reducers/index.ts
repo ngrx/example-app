@@ -1,5 +1,5 @@
 import '@ngrx/core/add/operator/select';
-import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
 
@@ -105,8 +105,8 @@ export default compose(storeLogger(), combineReducers)({
  * reducer's getBooks selector, finally returning an observable
  * of search results.
  */
- export function getBooks() {
-   return compose(fromBooks.getBooks(), getBooksState());
+ export function getBookEntities() {
+   return compose(fromBooks.getBookEntities(), getBooksState());
  }
 
  export function getBook(id: string) {
@@ -115,6 +115,10 @@ export default compose(storeLogger(), combineReducers)({
 
  export function hasBook(id: string) {
    return compose(fromBooks.hasBook(id), getBooksState());
+ }
+
+ export function getBooks(bookIds: string[]) {
+   return compose(fromBooks.getBooks(bookIds), getBooksState());
  }
 
 
@@ -139,15 +143,15 @@ export function getSearchQuery() {
   return compose(fromSearch.getQuery(), getSearchState());
 }
 
+/**
+ * Some selector functions create joins across parts of state. This selector
+ * composes the search result IDs to return an array of books in the store.
+ */
 export function getSearchResults() {
   return (state$: Observable<AppState>) => state$
     .let(getSearchBookIds())
-    .withLatestFrom(
-      state$.let(getBooks()),
-      (ids, books) => ids.map(id => books[id])
-    );
+    .switchMap(bookIds => state$.let(getBooks(bookIds)));
 }
-
 
 
 
@@ -175,8 +179,5 @@ export function isBookInCollection(id: string) {
 export function getBookCollection() {
   return (state$: Observable<AppState>) => state$
     .let(getCollectionBookIds())
-    .withLatestFrom(
-      state$.let(getBooks()),
-      (ids, books) => ids.map(id => books[id])
-    );
+    .switchMap(bookIds => state$.let(getBooks(bookIds)));
 }

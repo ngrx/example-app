@@ -27,18 +27,6 @@ module.exports = {
     modulesDirectories: ['node_modules']
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'source-map-loader',
-        exclude: [
-          // these packages have problems with their sourcemaps
-          root('node_modules/rxjs'),
-          root('node_modules/@ngrx')
-        ]
-      }
-
-    ],
     loaders: [
       {
         test: /\.ts$/,

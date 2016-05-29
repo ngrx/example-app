@@ -1,4 +1,5 @@
 import '@ngrx/core/add/operator/select';
+import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 
@@ -62,7 +63,7 @@ export default function(state = initialState, action: Action): BooksState {
  * the tables, selectors can be considered the queries into said database. Remember to keep your selectors
  * small and focused so they can be combined and composed to fit each particular use-case.
  */
-export function getBooks() {
+export function getBookEntities() {
   return (state$: Observable<BooksState>) => state$
     .select(s => s.entities);
 };
@@ -70,6 +71,12 @@ export function getBooks() {
 export function getBook(id: string) {
   return (state$: Observable<BooksState>) => state$
     .select(s => s.entities[id]);
+}
+
+export function getBooks(bookIds: string[]) {
+  return (state$: Observable<BooksState>) => state$
+    .let(getBookEntities())
+    .map(entities => bookIds.map(id => entities[id]));
 }
 
 export function hasBook(id: string) {
