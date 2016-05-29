@@ -65,17 +65,15 @@ export class BookEffects {
       .catch(() => Observable.of(
         this.bookActions.removeFromCollectionFail(book)
       ))
-    )
-    .filter(() => false);
+    );
 
   @Effect() removeBookFromCollection$ = this.updates$
     .whenAction(BookActions.REMOVE_FROM_COLLECTION)
     .map<Book>(toPayload)
-    .mergeMap(book => this.db.executeWrite('books', 'delete', [ book ])
+    .mergeMap(book => this.db.executeWrite('books', 'delete', [ book.id ])
       .mapTo(this.bookActions.removeFromCollectionSuccess(book))
       .catch(() => Observable.of(
         this.bookActions.removeFromCollectionFail(book)
       ))
-    )
-    .filter(() => false);
+    );
 }

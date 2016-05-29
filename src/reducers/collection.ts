@@ -36,7 +36,7 @@ export default function(state = initialState, action: Action): CollectionState {
       };
     }
 
-    case BookActions.ADD_TO_COLLECTION:
+    case BookActions.ADD_TO_COLLECTION_SUCCESS:
     case BookActions.REMOVE_FROM_COLLECTION_FAIL: {
       const book: Book = action.payload;
 
@@ -49,7 +49,7 @@ export default function(state = initialState, action: Action): CollectionState {
       });
     }
 
-    case BookActions.REMOVE_FROM_COLLECTION:
+    case BookActions.REMOVE_FROM_COLLECTION_SUCCESS:
     case BookActions.ADD_TO_COLLECTION_FAIL: {
       const book: Book = action.payload;
 
