@@ -50,6 +50,8 @@ export class BookDetailComponent {
    * but generally maintain no internal state of their own. All decisions are delegated to 'container',
    * or 'smart' components before data updates flow back down.
    *
+   * More on 'smart' and 'dumb' components: https://gist.github.com/btroncone/a6e4347326749f938510#utilizing-container-components
+   * 
    * Tip: Utilize getters to keep templates clean in 'dumb' components.
    */
   @Input() book: BookInput;

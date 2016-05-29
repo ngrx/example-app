@@ -27,6 +27,7 @@ export class BookFindPage {
      * Selectors can be applied with the `let` operator, which passes the source
      * observable to the provided function. This allows us an expressive, composable technique
      * for creating view projections.
+     * 
      * More on `let`: https://gist.github.com/btroncone/d6cf141d6f2c00dc6b35#let
      * More on selectors: https://gist.github.com/btroncone/a6e4347326749f938510#extracting-selectors-for-reuse
      */
