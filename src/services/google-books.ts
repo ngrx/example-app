@@ -3,23 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-export interface Book {
-  id: string;
-  volumeInfo: {
-    title: string;
-    subtitle: string;
-    authors: string[];
-    publisher: string;
-    publishDate: string;
-    description: string;
-    averageRating: number;
-    ratingsCount: number;
-    imageLinks: {
-      thumbnail: string;
-      smallThumbnail: string;
-    };
-  };
-}
+import { Book } from '../models';
 
 @Injectable()
 export class GoogleBooksService {
@@ -34,7 +18,8 @@ export class GoogleBooksService {
       .map(({ items }) => items);
   }
 
-  retrieveBook(volumeId: string): Observable<Response> {
-    return this.http.get(`${this.API_PATH}/volumes/${volumeId}`);
+  retrieveBook(volumeId: string): Observable<Book> {
+    return this.http.get(`${this.API_PATH}/volumes/${volumeId}`)
+      .map(res => res.json());
   }
 }

@@ -8,18 +8,18 @@ import { runEffects } from '@ngrx/effects';
 
 import App from './app';
 import routes from './routes';
+import schema from './db-schema';
 import reducer from './reducers';
 import effects from './effects';
 import services from './services';
 import actions from './actions';
-import schema from './db-schema';
 
 bootstrap(App, [
   provideRouter(routes, HashLocationStrategy),
+  provideDB(schema),
   provideStore(reducer),
   connectRouterToStore(),
   runEffects(effects),
   services,
-  actions,
-  provideDB(schema)
+  actions
 ]);

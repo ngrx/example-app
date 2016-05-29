@@ -1,10 +1,9 @@
 import 'rxjs/add/operator/let';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState, getBooks } from '../reducers';
-import { BookActions } from '../actions';
+import { AppState, getBookCollection } from '../reducers';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
 
 
@@ -20,11 +19,7 @@ import { BookPreviewListComponent, BooksInput } from '../components/book-preview
 export class CollectionPage {
   books$: Observable<BooksInput>;
 
-  constructor(private store: Store<AppState>, private bookActions: BookActions) {
-    this.books$ = store.let(getBooks());
-  }
-
-  ngOnInit() {
-    this.store.dispatch(this.bookActions.loadCollection());
+  constructor(store: Store<AppState>) {
+    this.books$ = store.let(getBookCollection());
   }
 }

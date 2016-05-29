@@ -1,5 +1,7 @@
 import { Routes } from '@ngrx/router';
 
+import { BookExistsGuard } from './guards/book-exists';
+
 const routes: Routes = [
   {
     path: '/',
@@ -8,10 +10,19 @@ const routes: Routes = [
     }))
   },
   {
-    path: '/book/add',
+    path: '/book/find',
     loadComponent: () => new Promise(resolve => {
       (require as any).ensure([], require => {
-        resolve(require('./pages/book-add').BookAddPage);
+        resolve(require('./pages/book-find').BookFindPage);
+      });
+    })
+  },
+  {
+    path: '/book/:id',
+    guards: [ BookExistsGuard ],
+    loadComponent: () => new Promise(resolve => {
+      (require as any).ensure([], require => {
+        resolve(require('./pages/book-view').BookViewPage);
       });
     })
   },

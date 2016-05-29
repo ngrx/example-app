@@ -2,7 +2,7 @@ import { DBSchema } from '@ngrx/db';
 
 const schema: DBSchema = {
   version: 1,
-  name: 'books_demo',
+  name: 'books_app',
   stores: {
     books: {
       autoIncrement: true,

@@ -1,4 +1,5 @@
 import '@ngrx/core/add/operator/select';
+import 'rxjs/add/operator/withLatestFrom';
 import { Observable } from 'rxjs/Observable';
 
 /**
@@ -33,6 +34,7 @@ import { combineReducers } from '@ngrx/store';
  */
 import { routerReducer, RouterState } from '@ngrx/router-store';
 
+
 /**
  * Every reducer module's default export is the reducer function itself. In
  * addition, each module should export a type or interface that describes
@@ -41,6 +43,7 @@ import { routerReducer, RouterState } from '@ngrx/router-store';
  */
 import searchReducer, * as fromSearch from './search';
 import booksReducer, * as fromBooks from './books';
+import collectionReducer, * as fromCollection from './collection';
 
 
 /**
@@ -51,7 +54,9 @@ export interface AppState {
   router: RouterState;
   search: fromSearch.SearchState;
   books: fromBooks.BooksState;
+  collection: fromCollection.CollectionState;
 }
+
 
 /**
  * Because metareducers take a reducer function and return a new reducer,
@@ -63,13 +68,15 @@ export interface AppState {
 export default compose(storeLogger(), combineReducers)({
   router: routerReducer,
   search: searchReducer,
-  books: booksReducer
+  books: booksReducer,
+  collection: collectionReducer
 });
+
 
 /**
  * A selector function is a map function factory. We pass it parameters and it
  * returns a function that maps from the larger state tree into a smaller
- * piece of state. This selector simply selects the `search` state.
+ * piece of state. This selector simply selects the `books` state.
  *
  * Selectors are used with the `let` operator. They take an input observable
  * and return a new observable. Here's how you would use this selector:
@@ -77,14 +84,14 @@ export default compose(storeLogger(), combineReducers)({
  * ```ts
  * class MyComponent {
  * 	constructor(state$: Observable<AppState>) {
- * 	  this.searchState$ = state$.let(getSearchState());
+ * 	  this.booksState$ = state$.let(getBooksState());
  * 	}
  * }
  * ```
  */
-export function getSearchState() {
+ export function getBooksState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.search);
+    .select(s => s.books);
 }
 
 /**
@@ -93,12 +100,30 @@ export function getSearchState() {
  * need to make new selectors that wrap them.
  *
  * Once again our compose function comes in handy. From right to left, we
- * first select the search state then we pass the state to the search
- * reducer's getResults selector, finally returning an observable of
- * search results.
+ * first select the books state then we pass the state to the book
+ * reducer's getBooks selector, finally returning an observable
+ * of search results.
  */
-export function getSearchResults() {
-  return compose(fromSearch.getResults(), getSearchState());
+ export function getBooks() {
+   return compose(fromBooks.getBooks(), getBooksState());
+ }
+
+ export function getBook(id: string) {
+   return compose(fromBooks.getBook(id), getBooksState());
+ }
+
+
+/**
+ * Just like with the books selectors, we also have to compose the search
+ * reducer's and collection reducer's selectors.
+ */
+export function getSearchState() {
+ return (state$: Observable<AppState>) => state$
+   .select(s => s.search);
+}
+
+export function getSearchBookIds() {
+  return compose(fromSearch.getBookIds(), getSearchState());
 }
 
 export function getSearchStatus() {
@@ -109,19 +134,44 @@ export function getSearchQuery() {
   return compose(fromSearch.getQuery(), getSearchState());
 }
 
-/**
- * Just like with the search selectors, we also have to compose the book
- * reducer's selectors.
- */
-export function getBooksState() {
+export function getSearchResults() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.books);
+    .let(getSearchBookIds())
+    .withLatestFrom(
+      state$.let(getBooks()),
+      (ids, books) => ids.map(id => books[id])
+    );
 }
 
-export function getBooks() {
-  return compose(fromBooks.getBooks(), getBooksState());
+
+
+
+export function getCollectionState() {
+  return (state$: Observable<AppState>) => state$
+    .select(s => s.collection);
 }
 
-export function getBook(id: string) {
-  return compose(fromBooks.getBook(id), getBooksState());
+export function getCollectionLoaded() {
+  return compose(fromCollection.getLoaded(), getCollectionState());
+}
+
+export function getCollectionLoading() {
+  return compose(fromCollection.getLoading(), getCollectionState());
+}
+
+export function getCollectionBookIds() {
+  return compose(fromCollection.getBookIds(), getCollectionState());
+}
+
+export function isBookInCollection(id: string) {
+  return compose(fromCollection.isBookInCollection(id), getCollectionState());
+}
+
+export function getBookCollection() {
+  return (state$: Observable<AppState>) => state$
+    .let(getCollectionBookIds())
+    .withLatestFrom(
+      state$.let(getBooks()),
+      (ids, books) => ids.map(id => books[id])
+    );
 }

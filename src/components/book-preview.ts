@@ -1,28 +1,30 @@
 import { Component, Input } from '@angular/core';
 
-import { Book } from '../services/google-books';
+import { Book } from '../models';
 
 export type BookInput = Book;
 
 @Component({
   selector: 'book-preview',
   template: `
-    <h3>{{ title }}</h3>
-    <h4 *ngIf="subtitle">{{ subtitle }}</h4>
+    <a [linkTo]=" '/book/' + id">
+      <h3>{{ title }}</h3>
+      <h4 *ngIf="subtitle">{{ subtitle }}</h4>
 
-    <img *ngIf="thumbnail" [src]="thumbnail">
+      <img *ngIf="thumbnail" [src]="thumbnail">
 
-    <p>{{ description }}</p>
+      <p>{{ description }}</p>
 
-    <div>
-      Written By:
-      <ul>
-        <li *ngFor="let author of authors">{{ author }}</li>
-      </ul>
-    </div>
+      <div>
+        Written By:
+        <ul>
+          <li *ngFor="let author of authors">{{ author }}</li>
+        </ul>
+      </div>
+    </a>
   `,
   styles: [`
-    :host {
+    a {
       display: block;
       width: 300px;
       padding: 20px;
@@ -34,6 +36,10 @@ export type BookInput = Book;
 })
 export class BookPreviewComponent {
   @Input() book: BookInput;
+
+  get id() {
+    return this.book.id;
+  }
 
   get title() {
     return this.book.volumeInfo.title;
