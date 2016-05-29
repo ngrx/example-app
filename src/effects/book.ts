@@ -25,9 +25,7 @@ export class BookEffects {
     private googleBooks: GoogleBooksService,
     private db: Database,
     private bookActions: BookActions
-  ) {
-    db.open('books_app').subscribe();
-  }
+  ) { }
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
