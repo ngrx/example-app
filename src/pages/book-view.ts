@@ -15,6 +15,7 @@ import {
   RemoveOutput
 } from '../components/book-detail';
 
+
 @Component({
   selector: 'book-view-page',
   directives: [ BookDetailComponent ],

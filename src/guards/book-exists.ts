@@ -12,10 +12,11 @@ import { BookActions } from '../actions/book';
 
 
 /**
- * Guards are hooks into the route resolution process, providing an opportunity to inform
- * the router's traversal process whether the route should continue to be considered a candidate route.
- * Guards must return an observable of true or false.
- * 
+ * Guards are hooks into the route resolution process, providing an opportunity
+ * to inform the router's traversal process whether the route should continue
+ * to be considered a candidate route. Guards must return an observable of
+ * true or false.
+ *
  * More on guards: https://github.com/ngrx/router/blob/master/docs/overview/guards.md
  */
 @Injectable()
@@ -28,7 +29,7 @@ export class BookExistsGuard implements Guard {
 
   /**
    * This method creates an observable that waits for the `loaded` property
-   * of the collection to turn `true`, emitting one time once loading
+   * of the collection state to turn `true`, emitting one time once loading
    * has finished.
    */
   waitForCollectionToLoad() {

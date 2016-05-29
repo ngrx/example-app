@@ -8,12 +8,12 @@ Example application utilizing @ngrx libraries, showcasing common patterns and be
  - [ngrx/router](https://github.com/ngrx/router) - Reactive Routing for Angular 2
  - [ngrx/db](https://github.com/ngrx/db) - RxJS powered IndexedDB for Angular2 apps
  - [ngrx/router-store](https://github.com/ngrx/router-store) - Bindings to connect ngrx/router to ngrx/store
- 
+
 ### Quick start
 
 ```bash
 # clone the repo
-git clone https://github.com/ngrx/angular2-store-example.git
+git clone https://github.com/ngrx/angular2-example.git
 
 # change directory to repo
 cd angular2-store-example
@@ -22,7 +22,7 @@ cd angular2-store-example
 npm install
 
 # start the server
-npm run server:dev
+npm run start
 ```
 
 Navigate to [http://localhost:8080/](http://localhost:8080/) in your browser

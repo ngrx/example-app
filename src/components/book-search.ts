@@ -17,8 +17,8 @@ export type SearchOutput = string;
 })
 export class BookSearchComponent {
   /**
-   * Tip: Push events into a subject if you want to treat event streams
-   * as observables.
+   * Tip: Push events into a subject if you want to handle event streams using
+   * observables.
    */
   keyup$ = new Subject<KeyboardEvent>();
 

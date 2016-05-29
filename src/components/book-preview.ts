@@ -8,24 +8,25 @@ export type BookInput = Book;
 @Component({
   selector: 'book-preview',
   template: `
-    <a [linkTo]=" '/book/' + id">
+    <a [linkTo]=" '/book/' + id ">
       <h3>{{ title }}</h3>
-      <h4 *ngIf="subtitle">{{ subtitle }}</h4>
-
-      <img *ngIf="thumbnail" [src]="thumbnail">
-
-      <p>{{ description }}</p>
-
-      <div>
-        Written By:
-        <ul>
-          <li *ngFor="let author of authors">{{ author }}</li>
-        </ul>
-      </div>
     </a>
+
+    <h4 *ngIf="subtitle">{{ subtitle }}</h4>
+
+    <img *ngIf="thumbnail" [src]="thumbnail">
+
+    <p>{{ description }}</p>
+
+    <div>
+      Written By:
+      <ul>
+        <li *ngFor="let author of authors">{{ author }}</li>
+      </ul>
+    </div>
   `,
   styles: [`
-    a {
+    :host {
       display: block;
       width: 300px;
       padding: 20px;
@@ -58,7 +59,11 @@ export class BookPreviewComponent {
     return this.book.volumeInfo.authors;
   }
 
-  get thumbnail() {
-    return this.book.volumeInfo.imageLinks.smallThumbnail;
+  get thumbnail(): string | boolean {
+    if (this.book.volumeInfo.imageLinks) {
+      return this.book.volumeInfo.imageLinks.smallThumbnail;
+    }
+
+    return false;
   }
 }
