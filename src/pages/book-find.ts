@@ -8,16 +8,37 @@ import { AppState, getSearchResults, getSearchQuery } from '../reducers';
 import { BookActions } from '../actions';
 import { BookSearchComponent, QueryInput, SearchOutput } from '../components/book-search';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 
 
 @Component({
   selector: 'book-find-page',
-  directives: [ BookSearchComponent, BookPreviewListComponent ],
+  directives: [
+    BookSearchComponent,
+    BookPreviewListComponent,
+    ...MD_CARD_DIRECTIVES
+  ],
   template: `
-    <h2>Find a Book</h2>
-    <book-search [query]="searchQuery$ | async" (search)="search($event)"></book-search>
+    <md-card>
+      <md-card-title>Find a Book</md-card-title>
+      <md-card-content>
+      <book-search [query]="searchQuery$ | async" (search)="search($event)"></book-search>
+      </md-card-content>
+    </md-card>
     <book-preview-list [books]="books$ | async"></book-preview-list>
-  `
+  `,
+  styles: [`
+    md-card-title,
+    md-card-content {
+      display: flex;
+      justify-content: center;
+    }
+    book-preview-list {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+  `]
 })
 export class BookFindPage {
   searchQuery$: Observable<QueryInput>;
