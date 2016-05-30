@@ -10,8 +10,8 @@ export type BookInput = Book;
 @Component({
   selector: 'book-preview',
   directives: [
-    ...MD_CARD_DIRECTIVES,
-    ...MD_LIST_DIRECTIVES
+    MD_CARD_DIRECTIVES,
+    MD_LIST_DIRECTIVES
   ],
   template: `
     <a [linkTo]=" '/book/' + id">

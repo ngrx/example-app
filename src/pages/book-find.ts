@@ -16,7 +16,7 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
   directives: [
     BookSearchComponent,
     BookPreviewListComponent,
-    ...MD_CARD_DIRECTIVES
+    MD_CARD_DIRECTIVES
   ],
   template: `
     <md-card>

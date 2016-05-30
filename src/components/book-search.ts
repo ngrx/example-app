@@ -12,7 +12,7 @@ export type SearchOutput = string;
 
 @Component({
   selector: 'book-search',
-  directives: [ ...MD_INPUT_DIRECTIVES ],
+  directives: [ MD_INPUT_DIRECTIVES ],
   template: `
     <md-input placeholder="Search for a book" [value]="query" (keyup)="keyup$.next($event)"></md-input>
   `,

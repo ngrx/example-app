@@ -22,10 +22,15 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
     <md-sidenav-layout fullscreen>
       <md-sidenav #sidenav>
         <md-nav-list>
-          <a md-list-item *ngFor="let view of views" [linkTo]="view.link" (click)="sidenav.close()">
-            <md-icon md-list-icon>{{ view.icon }}</md-icon>
-            <span md-line>{{ view.name }}</span>
-            <span md-line class="secondary">{{ view.description }}</span>
+          <a md-list-item linkTo="/" (click)="sidenav.close()">
+            <md-icon md-list-icon>book</md-icon>
+            <span md-line>My Collection</span>
+            <span md-line class="secondary">View your book collection!</span>
+          </a>
+          <a md-list-item linkTo="/book/find" (click)="sidenav.close()">
+            <md-icon md-list-icon>search</md-icon>
+            <span md-line>Browse Books</span>
+            <span md-line class="secondary">Find your next book!</span>
           </a>
         </md-nav-list>
       </md-sidenav>
@@ -41,19 +46,4 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
     </md-sidenav-layout>
   `
 })
-export default class App {
-  views: Object[] = [
-    {
-      name: 'My Collection',
-      description: 'View your book collection!',
-      icon: 'book',
-      link: '/'
-    },
-    {
-      name: 'Browse Books',
-      description: 'Find your next book!',
-      icon: 'search',
-      link: '/book/find'
-    }
-  ]
-}
+export default class App { }
