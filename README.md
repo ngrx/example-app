@@ -15,10 +15,10 @@ This app is a book collection manager. Using the Google Books API, the user can 
 
 ```bash
 # clone the repo
-git clone https://github.com/ngrx/angular2-example.git
+git clone https://github.com/ngrx/example-app.git
 
 # change directory to repo
-cd angular2-store-example
+cd example-app
 
 # run npm install
 npm install
