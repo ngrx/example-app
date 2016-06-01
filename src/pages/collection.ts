@@ -5,16 +5,25 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppState, getBookCollection } from '../reducers';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 
 
 @Component({
   selector: 'collection-page',
-  directives: [ BookPreviewListComponent ],
+  directives: [ BookPreviewListComponent, MD_CARD_DIRECTIVES ],
   template: `
-    <h2>My Collection</h2>
+    <md-card>
+      <md-card-title>My Collection</md-card-title>
+    </md-card>
 
     <book-preview-list [books]="books$ | async"></book-preview-list>
-  `
+  `,
+  styles: [`
+    md-card-title {
+      display: flex;
+      justify-content: center;
+    }
+  `]
 })
 export class CollectionPage {
   books$: Observable<BooksInput>;

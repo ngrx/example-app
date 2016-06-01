@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 
 import { Book } from '../models';
+import { AddCommasPipe } from '../pipes/add-commas';
+import { EllipsisPipe } from '../pipes/ellipsis';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 
@@ -9,6 +11,7 @@ export type BookInput = Book;
 
 @Component({
   selector: 'book-preview',
+  pipes: [ AddCommasPipe, EllipsisPipe ],
   directives: [
     MD_CARD_DIRECTIVES,
     MD_LIST_DIRECTIVES
@@ -22,22 +25,25 @@ export type BookInput = Book;
           <img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
         </md-card-title-group>
         <md-card-content>
-          <p *ngIf="description">{{ description | slice: 0:250 }}{{ description.length > 20 ? '...' : '' }}</p>
+          <p *ngIf="description">{{ description | ellipsis }}</p>
         </md-card-content>
-        <md-list dense>
-          <h3 md-subheader>Written By:</h3>
-          <md-list-item *ngFor="let author of authors">
-            <h4 md-line>{{ author }}</h4>
-          </md-list-item>
-        </md-list>
+        <md-card-footer>
+          <h5 md-subheader>Written By:</h5>
+          <span>
+            {{ authors | addCommas }}
+          </span>
+        </md-card-footer>
       </md-card>
     </a>
   `,
   styles: [`
     md-card {
       width: 400px;
-      box-sizing: border-box;
-      margin: 16px;
+      height: 300px;
+      margin: 15px;
+    }
+    md-card-title {
+      margin-right: 10px;
     }
     a {
       color: inherit;
@@ -45,9 +51,18 @@ export type BookInput = Book;
     }
     img {
       width: 60px;
+      min-width: 60px;
+      margin-left: 5px;
     }
     md-card-content {
-      margin-top: 10px;
+      margin-top: 15px;
+    }
+    span {
+      display: inline-block;
+      font-size: 13px;
+    }
+    md-card-footer {
+      padding-bottom: 25px;
     }
   `]
 })

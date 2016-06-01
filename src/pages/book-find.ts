@@ -9,6 +9,7 @@ import { BookActions } from '../actions';
 import { BookSearchComponent, QueryInput, SearchOutput } from '../components/book-search';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
   directives: [
     BookSearchComponent,
     BookPreviewListComponent,
-    MD_CARD_DIRECTIVES
+    MD_CARD_DIRECTIVES,
+    MD_GRID_LIST_DIRECTIVES
   ],
   template: `
     <md-card>
@@ -31,11 +33,6 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
     md-card-title,
     md-card-content {
       display: flex;
-      justify-content: center;
-    }
-    book-preview-list {
-      display: flex;
-      flex-flow: row wrap;
       justify-content: center;
     }
   `]
