@@ -1,6 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Book } from '../models';
+import { AddCommasPipe } from '../pipes/add-commas';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import { MdButton } from '@angular2-material/button';
 
 /**
  * Tip: Export type aliases for your component's inputs and outputs. Until we
@@ -14,37 +18,59 @@ export type RemoveOutput = Book;
 
 @Component({
   selector: 'book-detail',
+  pipes: [ AddCommasPipe ],
+  directives: [ MD_CARD_DIRECTIVES, MD_LIST_DIRECTIVES, MdButton ],
   template: `
-    <h3>{{ title }}</h3>
-    <h4 *ngIf="subtitle">{{ subtitle }}</h4>
+    <md-card>
+      <md-card-title-group>
+        <md-card-title>{{ title }}</md-card-title>
+        <md-card-subtitle *ngIf="subtitle">{{ subtitle }}</md-card-subtitle>
+        <img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
+      </md-card-title-group>
+      <md-card-content>
+        <p [innerHtml]="description"></p>
+      </md-card-content>
+      <md-card-footer>
+        <h5 md-subheader>Written By:</h5>
+        <span>
+          {{ authors | addCommas }}
+        </span>
+      </md-card-footer>
+      <md-card-actions align="end">
+        <button md-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(book)">
+        Remove Book from Collection
+        </button>
 
-    <button *ngIf="inCollection" (click)="remove.emit(book)">
-      Remove Book from Collection
-    </button>
+        <button md-raised-button color="primary" *ngIf="!inCollection" (click)="add.emit(book)">
+        Add Book to Collection
+        </button>
+      </md-card-actions>
+    </md-card>
 
-    <button *ngIf="!inCollection" (click)="add.emit(book)">
-      Add Book to Collection
-    </button>
-
-    <img *ngIf="thumbnail" [src]="thumbnail">
-
-    <p [innerHtml]="description"></p>
-
-    <div>
-      Written By:
-      <ul>
-        <li *ngFor="let author of authors">{{ author }}</li>
-      </ul>
-    </div>
   `,
   styles: [`
     :host {
-      display: block;
-      width: 300px;
-      padding: 20px;
-      border: 1px solid black;
-      margin: 10px;
-      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      margin: 75px 0;
+    }
+    md-card {
+      max-width: 600px;
+    }
+    md-card-title {
+      margin-left: 10px;
+    }
+    img {
+      width: 60px;
+      min-width: 60px;
+      margin-left: 5px;
+    }
+    md-card-content {
+      margin-top: 15px;
+      margin-bottom: 125px;
+    }
+    md-card-footer {
+      padding-bottom: 75px;
     }
   `]
 })

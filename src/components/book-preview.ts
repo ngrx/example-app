@@ -1,38 +1,68 @@
 import { Component, Input } from '@angular/core';
 
 import { Book } from '../models';
+import { AddCommasPipe } from '../pipes/add-commas';
+import { EllipsisPipe } from '../pipes/ellipsis';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 
 
 export type BookInput = Book;
 
 @Component({
   selector: 'book-preview',
+  pipes: [ AddCommasPipe, EllipsisPipe ],
+  directives: [
+    MD_CARD_DIRECTIVES,
+    MD_LIST_DIRECTIVES
+  ],
   template: `
-    <a [linkTo]=" '/book/' + id ">
-      <h3>{{ title }}</h3>
+    <a [linkTo]=" '/book/' + id">
+      <md-card>
+        <md-card-title-group>
+          <md-card-title>{{ title }}</md-card-title>
+          <md-card-subtitle *ngIf="subtitle">{{ subtitle }}</md-card-subtitle>
+          <img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
+        </md-card-title-group>
+        <md-card-content>
+          <p *ngIf="description">{{ description | ellipsis }}</p>
+        </md-card-content>
+        <md-card-footer>
+          <h5 md-subheader>Written By:</h5>
+          <span>
+            {{ authors | addCommas }}
+          </span>
+        </md-card-footer>
+      </md-card>
     </a>
-
-    <h4 *ngIf="subtitle">{{ subtitle }}</h4>
-
-    <img *ngIf="thumbnail" [src]="thumbnail">
-
-    <p>{{ description }}</p>
-
-    <div>
-      Written By:
-      <ul>
-        <li *ngFor="let author of authors">{{ author }}</li>
-      </ul>
-    </div>
   `,
   styles: [`
-    :host {
-      display: block;
-      width: 300px;
-      padding: 20px;
-      border: 1px solid black;
-      margin: 10px;
-      cursor: pointer;
+    md-card {
+      width: 400px;
+      height: 300px;
+      margin: 15px;
+    }
+    md-card-title {
+      margin-right: 10px;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    img {
+      width: 60px;
+      min-width: 60px;
+      margin-left: 5px;
+    }
+    md-card-content {
+      margin-top: 15px;
+    }
+    span {
+      display: inline-block;
+      font-size: 13px;
+    }
+    md-card-footer {
+      padding-bottom: 25px;
     }
   `]
 })
