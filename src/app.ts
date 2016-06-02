@@ -17,7 +17,24 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
     MD_LIST_DIRECTIVES
   ],
   providers: [ MdIconRegistry ],
-  styleUrls: ['./app.css'],
+  styles: [`
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .secondary {
+      color: rgba(0, 0, 0, .54);
+    }
+
+    md-sidenav-layout {
+      background: rgba(0, 0, 0, .03);
+    }
+
+    md-sidenav {
+      width: 300px;
+    }
+  `],
   template: `
     <md-sidenav-layout fullscreen>
       <md-sidenav #sidenav>
