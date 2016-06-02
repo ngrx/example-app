@@ -9,7 +9,6 @@ import { BookActions } from '../actions';
 import { BookSearchComponent, QueryInput, SearchOutput } from '../components/book-search';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
 
 
 @Component({
@@ -17,8 +16,7 @@ import { MD_GRID_LIST_DIRECTIVES } from '@angular2-material/grid-list';
   directives: [
     BookSearchComponent,
     BookPreviewListComponent,
-    MD_CARD_DIRECTIVES,
-    MD_GRID_LIST_DIRECTIVES
+    MD_CARD_DIRECTIVES
   ],
   template: `
     <md-card>
