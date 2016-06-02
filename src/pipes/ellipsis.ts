@@ -5,8 +5,9 @@ import { Pipe } from '@angular/core';
 })
 export class EllipsisPipe {
   transform(str) {
+    const withoutHtml = str.replace(/(<([^>]+)>)/ig);
     if (str.length >= 250)
-      return str.slice(0, 250).replace(/(<([^>]+)>)/ig) + '...';
-    return str;
+      return withoutHtml.slice(0, 250) + '...';
+    return withoutHtml;
   }
 }
