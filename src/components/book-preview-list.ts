@@ -8,7 +8,7 @@ export type BooksInput = BookInput[];
   selector: 'book-preview-list',
   directives: [ BookPreviewComponent ],
   template: `
-    <book-preview [book]="book" *ngFor="let book of books"></book-preview>
+    <book-preview *ngFor="let book of books" [book]="book"></book-preview>
   `,
   styles: [`
     :host {
