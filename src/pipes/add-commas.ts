@@ -5,6 +5,7 @@ import { Pipe } from '@angular/core';
 })
 export class AddCommasPipe {
   transform(authors) {
+    if(!authors) return '';
     switch (authors.length) {
       case 1:
         return authors[0];
