@@ -17,11 +17,15 @@ describe('AddCommasPipe', () => {
   });
 
   it('transforms ["Alice", "Bob", "Harry"] to "Alice, Bob and Harry"', () => {
-    expect(pipe.transform(['Alice', 'Bob', 'Harry'])).toEqual('Alice, Bob and Harry');
+    expect(pipe.transform(['Alice', 'Bob', 'Harry'])).toEqual('Alice, Bob, and Harry');
   });
 
   it('transforms undefined to "Author Unknown"', () => {
     expect(pipe.transform(undefined)).toEqual('Author Unknown');
+  });
+
+  it('transforms [] to "Author Unknown"', () => {
+    expect(pipe.transform([])).toEqual('Author Unknown');
   });
 
 });
