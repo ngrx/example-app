@@ -16,7 +16,7 @@ describe('AddCommasPipe', () => {
     expect(pipe.transform(['Alice', 'Bob'])).toEqual('Alice and Bob');
   });
 
-  it('transforms ["Alice", "Bob", "Harry"] to "Alice, Bob and Harry"', () => {
+  it('transforms ["Alice", "Bob", "Harry"] to "Alice, Bob, and Harry"', () => {
     expect(pipe.transform(['Alice', 'Bob', 'Harry'])).toEqual('Alice, Bob, and Harry');
   });
 
@@ -26,6 +26,10 @@ describe('AddCommasPipe', () => {
 
   it('transforms [] to "Author Unknown"', () => {
     expect(pipe.transform([])).toEqual('Author Unknown');
+  });
+
+  it('transforms ["Alice"] to "Alice"', () => {
+    expect(pipe.transform(['Alice'])).toEqual('Alice');
   });
 
 });
