@@ -75,7 +75,7 @@ export class BookEffects {
     .mergeMap(book => this.db.insert('books', [ book ])
       .mapTo(this.bookActions.addToCollectionSuccess(book))
       .catch(() => Observable.of(
-        this.bookActions.removeFromCollectionFail(book)
+        this.bookActions.addToCollectionFail(book)
       ))
     );
 
