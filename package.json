@@ -1,7 +1,7 @@
 {
-  "name": "angular2-webpack-lite",
+  "name": "example-app",
   "version": "1.0.0",
-  "description": "Angular2 Webpack Lite Boilerplate",
+  "description": "An example app showing usage of various ngrx modules",
   "main": "index.ts",
   "scripts": {
     "typings": "typings",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLarkInn/angular2-webpack-lite.git"
+    "url": "git+https://github.com/ngrx/example-app.git"
   },
-  "author": "Sean Larkin",
+  "author": "Mike Ryan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheLarkInn/angular2-webpack-lite/issues"
+    "url": "https://github.com/ngrx/example-app/issues"
   },
-  "homepage": "https://github.com/TheLarkInn/angular2-webpack-lite#readme",
+  "homepage": "https://github.com/ngrx/example-app#readme",
   "engines": {
     "node": ">= 4.2.1",
     "npm": ">= 3"
