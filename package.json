@@ -1,25 +1,26 @@
 {
-  "name": "angular2-webpack-lite",
+  "name": "example-app",
   "version": "1.0.0",
-  "description": "Angular2 Webpack Lite Boilerplate",
+  "description": "An example app showing usage of various ngrx modules",
   "main": "index.ts",
   "scripts": {
     "typings": "typings",
     "postinstall": "npm run typings -- install",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server:dev": "webpack-dev-server --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "start": "npm run server:dev"
+    "start": "npm run server:dev",
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheLarkInn/angular2-webpack-lite.git"
+    "url": "git+https://github.com/ngrx/example-app.git"
   },
-  "author": "Sean Larkin",
+  "author": "Mike Ryan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheLarkInn/angular2-webpack-lite/issues"
+    "url": "https://github.com/ngrx/example-app/issues"
   },
-  "homepage": "https://github.com/TheLarkInn/angular2-webpack-lite#readme",
+  "homepage": "https://github.com/ngrx/example-app#readme",
   "engines": {
     "node": ">= 4.2.1",
     "npm": ">= 3"
@@ -68,9 +69,23 @@
     "html-webpack-plugin": "^2.15.0",
     "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
+    "jasmine-core": "^2.4.1",
     "json-loader": "^0.5.4",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "1.7.0",
+    "parse5": "^1.5.1",
+    "phantomjs-polyfill": "0.0.2",
+    "phantomjs-prebuilt": "^2.1.7",
     "promise-loader": "^1.0.0",
     "raw-loader": "0.5.1",
+    "remap-istanbul": "^0.6.3",
+    "rimraf": "^2.5.2",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.1",
     "ts-helpers": "1.1.1",
@@ -84,6 +99,7 @@
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-md5-hash": "^0.0.5",
-    "webpack-merge": "^0.12.0"
+    "webpack-merge": "^0.12.0",
+    "istanbul-instrumenter-loader": "^0.2.0"
   }
 }
