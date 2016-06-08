@@ -8,7 +8,9 @@
     "postinstall": "npm run typings -- install",
     "build": "webpack --progress --profile --colors --display-error-details --display-cached",
     "server:dev": "webpack-dev-server --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "start": "npm run server:dev"
+    "start": "npm run server:dev",
+    "test": "karma start --single-run",
+    "test:watch": "karma start"
   },
   "repository": {
     "type": "git",
@@ -68,7 +70,17 @@
     "html-webpack-plugin": "^2.15.0",
     "http-server": "^0.9.0",
     "imports-loader": "^0.6.5",
+    "istanbul-instrumenter-loader": "^0.2.0",
+    "jasmine-core": "^2.4.1",
     "json-loader": "^0.5.4",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-coverage": "^0.5.5",
+    "karma-jasmine": "^0.3.8",
+    "karma-mocha-reporter": "^2.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-typescript-preprocessor": "0.0.21",
+    "karma-webpack": "^1.7.0",
     "promise-loader": "^1.0.0",
     "raw-loader": "0.5.1",
     "source-map-loader": "^0.1.5",
