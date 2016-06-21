@@ -3,10 +3,9 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState, getBook, isBookInCollection } from '../reducers';
+import { AppStore, getBook, isBookInCollection } from '../reducers';
 import { BookActions } from '../actions/book';
 import {
   BookDetailComponent,
@@ -34,7 +33,7 @@ export class BookViewPage {
   isBookInCollection$: Observable<InCollectionInput>;
 
   constructor(
-    private store: Store<AppState>,
+    private store: AppStore,
     private bookActions: BookActions,
     private route: ActivatedRoute
   ) {

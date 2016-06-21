@@ -1,10 +1,9 @@
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/take';
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { AppState, getSearchResults, getSearchQuery } from '../reducers';
+import { AppStore, getSearchResults, getSearchQuery } from '../reducers';
 import { BookActions } from '../actions';
 import { BookSearchComponent, QueryInput, SearchOutput } from '../components/book-search';
 import { BookPreviewListComponent, BooksInput } from '../components/book-preview-list';
@@ -39,7 +38,7 @@ export class BookFindPage {
   searchQuery$: Observable<QueryInput>;
   books$: Observable<BooksInput>;
 
-  constructor(private store: Store<AppState>, private bookActions: BookActions) {
+  constructor(private store: AppStore, private bookActions: BookActions) {
     /**
      * Selectors can be applied with the `let` operator, which passes the source
      * observable to the provided function. This allows us an expressive,
