@@ -1,10 +1,13 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { HashLocationStrategy } from '@angular/common';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { provideRouter } from '@ngrx/router';
 import { provideStore } from '@ngrx/store';
 import { provideDB } from '@ngrx/db';
 import { connectRouterToStore } from '@ngrx/router-store';
 import { runEffects } from '@ngrx/effects';
+import { instrumentStore } from '@ngrx/store-devtools';
+import { useLogMonitor } from '@ngrx/store-log-monitor';
 
 import App from './app';
 import routes from './routes';
@@ -61,9 +64,22 @@ bootstrap(App, [
   provideDB(schema),
 
   /**
+   * instrumentStore() sets up the @ngrx/store-devtools providers
+   */
+  instrumentStore({
+    monitor: useLogMonitor({
+      position: 'right',
+      visible: true
+    })
+  }),
+
+  /**
    * Finall we provide additional services and action creators so they can
    * be used by all of our components, effects, and guards.
    */
   services,
-  actions
+  actions,
+
+  disableDeprecatedForms(),
+  provideForms()
 ]);

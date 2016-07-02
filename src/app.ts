@@ -4,7 +4,7 @@ import { MdToolbar } from '@angular2-material/toolbar';
 import { MD_SIDENAV_DIRECTIVES } from '@angular2-material/sidenav';
 import { MdIcon, MdIconRegistry } from '@angular2-material/icon';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
-
+import { StoreLogMonitorComponent } from '@ngrx/store-log-monitor';
 
 @Component({
   selector: 'app',
@@ -14,7 +14,8 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
     MdToolbar,
     MD_SIDENAV_DIRECTIVES,
     MdIcon,
-    MD_LIST_DIRECTIVES
+    MD_LIST_DIRECTIVES,
+    StoreLogMonitorComponent
   ],
   providers: [ MdIconRegistry ],
   styles: [`
@@ -29,6 +30,7 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
 
     md-sidenav-layout {
       background: rgba(0, 0, 0, .03);
+      right: 30% !important; // Make space for the devtools, demo only
     }
 
     md-sidenav {
@@ -61,6 +63,7 @@ import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
       <route-view></route-view>
 
     </md-sidenav-layout>
+    <ngrx-store-log-monitor toggleCommand="ctrl-t"></ngrx-store-log-monitor>
   `
 })
 export default class App { }
