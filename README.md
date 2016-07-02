@@ -10,6 +10,8 @@ This app is a book collection manager. Using the Google Books API, the user can 
  - [ngrx/router](https://github.com/ngrx/router) - Reactive Routing for Angular 2
  - [ngrx/db](https://github.com/ngrx/db) - RxJS powered IndexedDB for Angular2 apps
  - [ngrx/router-store](https://github.com/ngrx/router-store) - Bindings to connect ngrx/router to ngrx/store
+ - [ngrx/store-devtools](https://github.com/ngrx/store-devtools) - Instrumentation for @ngrx/store enabling time-travel debugging
+ - [ngrx/store-log-monitor](https://github.com/ngrx/store-log-monitor) - A port of redux-devtools-log-monitor for Angular 2 and @ngrx/store
 
 ### Quick start
 
