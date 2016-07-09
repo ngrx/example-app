@@ -3,7 +3,7 @@ import 'rxjs/add/operator/first';
 import 'rxjs/add/observable/concat';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Guard, TraversalCandidate } from '@ngrx/router';
+import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { GoogleBooksService } from '../services/google-books';
@@ -13,18 +13,16 @@ import { BookActions } from '../actions/book';
 
 /**
  * Guards are hooks into the route resolution process, providing an opportunity
- * to inform the router's traversal process whether the route should continue
- * to be considered a candidate route. Guards must return an observable of
- * true or false.
- *
- * More on guards: https://github.com/ngrx/router/blob/master/docs/overview/guards.md
+ * to inform the router's navigation process whether the route should continue
+ * to activate this route. Guards must return an observable of true or false.
  */
 @Injectable()
-export class BookExistsGuard implements Guard {
+export class BookExistsGuard implements CanActivate {
   constructor(
     private store: Store<AppState>,
     private googleBooks: GoogleBooksService,
-    private bookActions: BookActions
+    private bookActions: BookActions,
+    private router: Router
   ) { }
 
   /**
@@ -55,7 +53,10 @@ export class BookExistsGuard implements Guard {
       .map(book => this.bookActions.loadBook(book))
       .do(action => this.store.dispatch(action))
       .map(book => !!book)
-      .catch(() => Observable.of(false));
+      .catch(() => {
+        this.router.navigate(['/404']);
+        return Observable.of(false);
+      });
   }
 
   /**
@@ -87,8 +88,8 @@ export class BookExistsGuard implements Guard {
    * on to the next candidate route. In this case, it will move on
    * to the 404 page.
    */
-  protectRoute({ routeParams: { id } }: TraversalCandidate) {
+  canActivate(route: ActivatedRouteSnapshot) {
     return this.waitForCollectionToLoad()
-      .switchMapTo(this.hasBook(id));
+      .switchMapTo(this.hasBook(route.params['id']));
   }
 }

@@ -1,7 +1,8 @@
 import '@ngrx/core/add/operator/select';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
 import { Component } from '@angular/core';
-import { RouteParams } from '@ngrx/router';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -35,13 +36,15 @@ export class BookViewPage {
   constructor(
     private store: Store<AppState>,
     private bookActions: BookActions,
-    private routeParams$: RouteParams
+    private route: ActivatedRoute
   ) {
-    this.book$ = routeParams$
+    this.book$ = route
+      .params
       .select<string>('id')
       .switchMap(id => store.let(getBook(id)));
 
-    this.isBookInCollection$ = routeParams$
+    this.isBookInCollection$ = route
+      .params
       .select<string>('id')
       .switchMap(id => store.let(isBookInCollection(id)));
   }

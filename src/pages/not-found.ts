@@ -13,7 +13,7 @@ import { MdButton } from '@angular2-material/button';
         <p>Hey! It looks like this page doesn't exist yet.</p>
       </md-card-content>
       <md-card-actions>
-        <button md-raised-button color="primary" linkTo="/">Take Me Home</button>
+        <button md-raised-button color="primary" routerLink="/">Take Me Home</button>
       </md-card-actions>
     </md-card>
   `,

@@ -1,10 +1,10 @@
 import { bootstrap } from '@angular/platform-browser-dynamic';
-import { HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
-import { provideRouter } from '@ngrx/router';
+import { provideRouter, ROUTER_DIRECTIVES } from '@angular/router';
+import { PLATFORM_DIRECTIVES } from '@angular/core';
 import { provideStore } from '@ngrx/store';
 import { provideDB } from '@ngrx/db';
-import { connectRouterToStore } from '@ngrx/router-store';
 import { runEffects } from '@ngrx/effects';
 import { instrumentStore } from '@ngrx/store-devtools';
 import { useLogMonitor } from '@ngrx/store-log-monitor';
@@ -16,6 +16,7 @@ import reducer from './reducers';
 import effects from './effects';
 import services from './services';
 import actions from './actions';
+import guards from './guards';
 
 
 bootstrap(App, [
@@ -42,20 +43,21 @@ bootstrap(App, [
   runEffects(effects),
 
   /**
-   * provideRouter sets up all of the providers for @ngrx/router. It accepts
+   * provideRouter sets up all of the providers for @angular/router. It accepts
    * an array of routes and a location strategy. By default, it will use
    * `PathLocationStrategy`.
-   *
-   * Source: https://github.com/ngrx/router/blob/master/lib/index.ts#L44-L51
    */
-  provideRouter(routes, HashLocationStrategy),
+  provideRouter(routes),
 
   /**
-   * connectRouterToStore configures additional providers that synchronize
-   * router state with @ngrx/store. This lets you debug router state using
-   * ngrx/store and to change the location by dispatching actions.
+   * Make router directives available to all components
    */
-  connectRouterToStore(),
+  { provide: PLATFORM_DIRECTIVES, useValue: [ROUTER_DIRECTIVES], multi: true },
+
+  /**
+   * Override the default location strategy with `HashLocationStrategy`
+   */
+  { provide: LocationStrategy, useClass: HashLocationStrategy },
 
   /**
    * provideDB sets up @ngrx/db with the provided schema and makes the Database
@@ -79,6 +81,7 @@ bootstrap(App, [
    */
   services,
   actions,
+  guards,
 
   disableDeprecatedForms(),
   provideForms()
