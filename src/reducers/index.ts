@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
  * it any number of functions and it returns a function. This new function
  * takes a value and chains it through every composed function, returning
  * the output.
- * 
+ *
  * More: https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch5.html
  */
 import { compose } from '@ngrx/core/compose';
@@ -28,16 +28,10 @@ import { storeLogger } from 'ngrx-store-logger';
  * functions and creates a new reducer that stores the gathers the values
  * of each reducer and stores them using the reducer's key. Think of it
  * almost like a database, where every reducer is a table in the db.
- * 
+ *
  * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
  */
 import { combineReducers } from '@ngrx/store';
-
-/**
- * @ngrx/router-store keeps the router in sync with @ngrx/store. To connect the
- * two, we need to use the routerReducer.
- */
-import { routerReducer, RouterState } from '@ngrx/router-store';
 
 
 /**
@@ -56,7 +50,6 @@ import collectionReducer, * as fromCollection from './collection';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface AppState {
-  router: RouterState;
   search: fromSearch.SearchState;
   books: fromBooks.BooksState;
   collection: fromCollection.CollectionState;
@@ -71,7 +64,6 @@ export interface AppState {
  * the result from right to left.
  */
 export default compose(storeLogger(), combineReducers)({
-  router: routerReducer,
   search: searchReducer,
   books: booksReducer,
   collection: collectionReducer

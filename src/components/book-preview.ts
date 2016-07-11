@@ -17,7 +17,7 @@ export type BookInput = Book;
     MD_LIST_DIRECTIVES
   ],
   template: `
-    <a [linkTo]=" '/book/' + id">
+    <a [routerLink]="['/book', id]">
       <md-card>
         <md-card-title-group>
           <md-card-title>{{ title }}</md-card-title>

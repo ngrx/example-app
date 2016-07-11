@@ -1,1 +1,7 @@
-export { BookExistsGuard } from './book-exists';
+import { BookExistsGuard } from './book-exists';
+
+export { BookExistsGuard };
+
+export default [
+  BookExistsGuard
+];
