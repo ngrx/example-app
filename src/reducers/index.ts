@@ -24,6 +24,13 @@ import { compose } from '@ngrx/core/compose';
 import { storeLogger } from 'ngrx-store-logger';
 
 /**
+ * storeFreeze prevents state from being mutated. When mutation occurs, an
+ * exception will be thrown. This is useful during development mode to
+ * ensure that none of the reducers accidentally mutates the state.
+ */
+import { storeFreeze } from 'ngrx-store-freeze';
+
+/**
  * combineReducers is another useful metareducer that takes a map of reducer
  * functions and creates a new reducer that stores the gathers the values
  * of each reducer and stores them using the reducer's key. Think of it
@@ -63,7 +70,7 @@ export interface AppState {
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
-export default compose(storeLogger(), combineReducers)({
+export default compose(storeFreeze, storeLogger(), combineReducers)({
   search: searchReducer,
   books: booksReducer,
   collection: collectionReducer
