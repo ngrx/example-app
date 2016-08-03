@@ -76,7 +76,7 @@ bootstrap(App, [
   }),
 
   /**
-   * Finall we provide additional services and action creators so they can
+   * Finally we provide additional services and action creators so they can
    * be used by all of our components, effects, and guards.
    */
   services,
