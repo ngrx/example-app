@@ -23,7 +23,7 @@ export default function(state = initialState, action: Action): SearchState {
     case BookActions.SEARCH: {
       const query = action.payload;
 
-      return Object.assign(state, {
+      return Object.assign({}, state, {
         query,
         loading: true
       });
