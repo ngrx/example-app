@@ -3,7 +3,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { provideRouter, ROUTER_DIRECTIVES } from '@angular/router';
 import { PLATFORM_DIRECTIVES } from '@angular/core';
-import { provideStore } from '@ngrx/store';
+import { provideStore, Store } from '@ngrx/store';
 import { provideDB } from '@ngrx/db';
 import { runEffects } from '@ngrx/effects';
 import { instrumentStore } from '@ngrx/store-devtools';
@@ -12,7 +12,7 @@ import { useLogMonitor } from '@ngrx/store-log-monitor';
 import App from './app';
 import routes from './routes';
 import schema from './db-schema';
-import reducer from './reducers';
+import reducer, { AppStore } from './reducers';
 import effects from './effects';
 import services from './services';
 import actions from './actions';
@@ -30,6 +30,13 @@ bootstrap(App, [
    * Source: https://github.com/ngrx/store/blob/master/src/ng2.ts#L43-L69
    */
   provideStore(reducer),
+
+  /**
+   * registers a typed Store with the DI, allowing us to inject AppStore into
+   * our components instead of the more verbose approach of manually typing
+   * the Store to AppState with Store<AppState>
+   */
+  { provide: AppStore, useExisting: Store },
 
   /**
    * runEffects configures all providers for @ngrx/effects. Observables decorated

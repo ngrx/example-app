@@ -2,12 +2,11 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/first';
 import 'rxjs/add/observable/concat';
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { GoogleBooksService } from '../services/google-books';
-import { AppState, hasBook, getCollectionLoaded } from '../reducers';
+import { AppStore, hasBook, getCollectionLoaded } from '../reducers';
 import { BookActions } from '../actions/book';
 
 
@@ -19,7 +18,7 @@ import { BookActions } from '../actions/book';
 @Injectable()
 export class BookExistsGuard implements CanActivate {
   constructor(
-    private store: Store<AppState>,
+    private store: AppStore,
     private googleBooks: GoogleBooksService,
     private bookActions: BookActions,
     private router: Router

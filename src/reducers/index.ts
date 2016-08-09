@@ -1,6 +1,8 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
+import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 /**
@@ -60,6 +62,10 @@ export interface AppState {
   search: fromSearch.SearchState;
   books: fromBooks.BooksState;
   collection: fromCollection.CollectionState;
+}
+
+@Injectable()
+export class AppStore extends Store<AppState> {
 }
 
 
