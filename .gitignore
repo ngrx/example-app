@@ -54,3 +54,5 @@ __build__/**
 
 # Build Artifacts #
 release
+distout
+*.ngfactory.ts
