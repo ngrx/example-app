@@ -37,7 +37,7 @@ describe('Books', function() {
 
     describe('getBook', function() {
       it('should get a selected book out of the books state', function() {
-        const state: fromBooks.BooksState = {
+        const state: fromBooks.State = {
           entities: {
             [TestBook.id]: TestBook
           },
@@ -52,7 +52,7 @@ describe('Books', function() {
 
     describe('getBooks', function() {
       it('should return all of the books in an array for a given list of ids', function() {
-        const state: fromBooks.BooksState = {
+        const state: fromBooks.State = {
           entities: {
             [TestBook.id]: TestBook
           },

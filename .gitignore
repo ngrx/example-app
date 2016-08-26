@@ -54,3 +54,4 @@ __build__/**
 
 # Build Artifacts #
 release
+*.ngfactory.ts

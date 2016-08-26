@@ -2,33 +2,32 @@ import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { CollectionActions, CollectionActionTypes } from '../actions/collection';
+import { Book } from '../models/book';
 
-import { BookActions } from '../actions/book';
-import { Book } from '../models';
 
-
-export interface CollectionState {
+export interface State {
   loaded: boolean;
   loading: boolean;
   ids: string[];
 };
 
-const initialState: CollectionState = {
+const initialState: State = {
   loaded: false,
   loading: false,
   ids: []
 };
 
-export default function(state = initialState, action: Action): CollectionState {
+export function reducer(state = initialState, action: CollectionActions): State {
   switch (action.type) {
-    case BookActions.LOAD_COLLECTION: {
+    case CollectionActionTypes.LOAD_COLLECTION: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case BookActions.LOAD_COLLECTION_SUCCESS: {
-      const books: Book[] = action.payload;
+    case CollectionActionTypes.LOAD_COLLECTION_SUCCESS: {
+      const books = action.payload;
 
       return {
         loaded: true,
@@ -37,11 +36,11 @@ export default function(state = initialState, action: Action): CollectionState {
       };
     }
 
-    case BookActions.ADD_TO_COLLECTION_SUCCESS:
-    case BookActions.REMOVE_FROM_COLLECTION_FAIL: {
-      const book: Book = action.payload;
+    case CollectionActionTypes.ADD_BOOK_SUCCESS:
+    case CollectionActionTypes.REMOVE_BOOK_FAIL: {
+      const book = action.payload;
 
-      if (state.ids.includes(book.id)) {
+      if (state.ids.indexOf(book.id) > -1) {
         return state;
       }
 
@@ -50,9 +49,9 @@ export default function(state = initialState, action: Action): CollectionState {
       });
     }
 
-    case BookActions.REMOVE_FROM_COLLECTION_SUCCESS:
-    case BookActions.ADD_TO_COLLECTION_FAIL: {
-      const book: Book = action.payload;
+    case CollectionActionTypes.REMOVE_BOOK_SUCCESS:
+    case CollectionActionTypes.ADD_TO_COLLECTION_FAIL: {
+      const book = action.payload;
 
       return Object.assign({}, state, {
         ids: state.ids.filter(id => id !== book.id)
@@ -66,23 +65,14 @@ export default function(state = initialState, action: Action): CollectionState {
 }
 
 
-export function getLoaded() {
-  return (state$: Observable<CollectionState>) => state$
-    .select(s => s.loaded);
+export function getLoaded(state$: Observable<State>) {
+  return state$.select(s => s.loaded);
 }
 
-export function getLoading() {
-  return (state$: Observable<CollectionState>) => state$
-    .select(s => s.loading);
+export function getLoading(state$: Observable<State>) {
+  return state$.select(s => s.loading);
 }
 
-export function getBookIds() {
-  return (state$: Observable<CollectionState>) => state$
-    .select(s => s.ids);
-}
-
-export function isBookInCollection(id: string) {
-  return (state$: Observable<CollectionState>) => state$
-    .let(getBookIds())
-    .map(ids => ids.includes(id));
+export function getBookIds(state$: Observable<State>) {
+  return state$.select(s => s.ids);
 }

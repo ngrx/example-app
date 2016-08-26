@@ -21,8 +21,14 @@
       "hammerjs"
     ]
   },
+  "include": [
+    "src/manual-types.d.ts",
+    "src/module.prod.ts"
+  ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/module.dev.ts",
+    "src/containers/devtools.ts"
   ],
   "compileOnSave": false,
   "buildOnSave": false,

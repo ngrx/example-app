@@ -1,27 +1,30 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
-import { Action } from '@ngrx/store';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { Book } from '../models/book';
+import { BookActions, BookActionTypes } from '../actions/book';
+import { CollectionActions, CollectionActionTypes } from '../actions/collection';
 
-import { Book } from '../models';
-import { BookActions } from '../actions';
 
-
-export interface BooksState {
+export interface State {
   ids: string[];
   entities: { [id: string]: Book };
+  selectedBookId: string | null;
 };
 
-const initialState: BooksState = {
+const initialState: State = {
   ids: [],
-  entities: {}
+  entities: {},
+  selectedBookId: null,
 };
 
-export default function(state = initialState, action: Action): BooksState {
+export  function reducer(state = initialState, action: BookActions | CollectionActions): State {
   switch (action.type) {
-    case BookActions.SEARCH_COMPLETE:
-    case BookActions.LOAD_COLLECTION_SUCCESS: {
-      const books: Book[] = action.payload;
+    case BookActionTypes.SEARCH_COMPLETE:
+    case CollectionActionTypes.LOAD_COLLECTION_SUCCESS: {
+      const books = action.payload;
       const newBooks = books.filter(book => !state.entities[book.id]);
 
       const newBookIds = newBooks.map(book => book.id);
@@ -33,14 +36,15 @@ export default function(state = initialState, action: Action): BooksState {
 
       return {
         ids: [ ...state.ids, ...newBookIds ],
-        entities: Object.assign({}, state.entities, newBookEntities)
+        entities: Object.assign({}, state.entities, newBookEntities),
+        selectedBookId: state.selectedBookId
       };
     }
 
-    case BookActions.LOAD_BOOK: {
-      const book: Book = action.payload;
+    case BookActionTypes.LOAD_BOOK: {
+      const book = action.payload;
 
-      if (state.ids.includes(book.id)) {
+      if (state.ids.indexOf(book.id) > -1) {
         return state;
       }
 
@@ -48,7 +52,16 @@ export default function(state = initialState, action: Action): BooksState {
         ids: [ ...state.ids, book.id ],
         entities: Object.assign({}, state.entities, {
           [book.id]: book
-        })
+        }),
+        selectedBookId: state.selectedBookId
+      };
+    }
+
+    case BookActionTypes.SELECT_BOOK: {
+      return {
+        ids: state.ids,
+        entities: state.entities,
+        selectedBookId: action.payload
       };
     }
 
@@ -66,23 +79,31 @@ export default function(state = initialState, action: Action): BooksState {
  * focused so they can be combined and composed to fit each particular
  * use-case.
  */
-export function getBookEntities() {
-  return (state$: Observable<BooksState>) => state$
-    .select(s => s.entities);
-};
 
-export function getBook(id: string) {
-  return (state$: Observable<BooksState>) => state$
-    .select(s => s.entities[id]);
+export function getBookEntities(state$: Observable<State>) {
+  return state$.select(state => state.entities);
 }
 
-export function getBooks(bookIds: string[]) {
-  return (state$: Observable<BooksState>) => state$
-    .let(getBookEntities())
-    .map(entities => bookIds.map(id => entities[id]));
+export function getBookIds(state$: Observable<State>) {
+  return state$.select(state => state.ids);
 }
 
-export function hasBook(id: string) {
-  return (state$: Observable<BooksState>) => state$
-    .select(s => s.ids.includes(id));
+export function getSelectedBookId(state$: Observable<State>) {
+  return state$.select(state => state.selectedBookId);
+}
+
+export function getSelectedBook(state$: Observable<State>) {
+  return combineLatest<{ [id: string]: Book }, string>(
+    state$.let(getBookEntities),
+    state$.let(getSelectedBookId)
+  )
+  .map(([ entities, selectedBookId ]) => entities[selectedBookId]);
+}
+
+export function getAllBooks(state$: Observable<State>) {
+  return combineLatest<{ [id: string]: Book }, string[]>(
+    state$.let(getBookEntities),
+    state$.let(getBookIds)
+  )
+  .map(([ entities, ids ]) => ids.map(id => entities[id]));
 }

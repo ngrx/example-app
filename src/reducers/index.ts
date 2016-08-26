@@ -2,6 +2,10 @@ import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/let';
 import { Observable } from 'rxjs/Observable';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { ActionReducer } from '@ngrx/store';
+import * as fromRouter from '@ngrx/router-store';
+import { Book } from '../models/book';
 
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
@@ -40,6 +44,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
  */
 import { combineReducers } from '@ngrx/store';
 
+import { share, Selector } from '../util';
+
 
 /**
  * Every reducer module's default export is the reducer function itself. In
@@ -47,19 +53,22 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import searchReducer, * as fromSearch from './search';
-import booksReducer, * as fromBooks from './books';
-import collectionReducer, * as fromCollection from './collection';
+import * as fromSearch from './search';
+import * as fromBooks from './books';
+import * as fromCollection from './collection';
+import * as fromLayout from './layout';
 
 
 /**
  * As mentioned, we treat each reducer like a table in a database. This means
  * our top level state interface is just a map of keys to inner state types.
  */
-export interface AppState {
-  search: fromSearch.SearchState;
-  books: fromBooks.BooksState;
-  collection: fromCollection.CollectionState;
+export interface State {
+  search: fromSearch.State;
+  books: fromBooks.State;
+  collection: fromCollection.State;
+  layout: fromLayout.State;
+  router: fromRouter.RouterState;
 }
 
 
@@ -70,11 +79,25 @@ export interface AppState {
  * wrapping that in storeLogger. Remember that compose applies
  * the result from right to left.
  */
-export default compose(storeFreeze, storeLogger(), combineReducers)({
-  search: searchReducer,
-  books: booksReducer,
-  collection: collectionReducer
-});
+const reducers = {
+  search: fromSearch.reducer,
+  books: fromBooks.reducer,
+  collection: fromCollection.reducer,
+  layout: fromLayout.reducer,
+  router: fromRouter.routerReducer,
+};
+
+const developmentReducer = compose(storeFreeze, combineReducers)(reducers);
+const productionReducer = combineReducers(reducers);
+
+export function reducer(state: any, action: any) {
+  if (PROD) {
+    return productionReducer(state, action);
+  }
+  else {
+    return developmentReducer(state, action);
+  }
+}
 
 
 /**
@@ -87,15 +110,24 @@ export default compose(storeFreeze, storeLogger(), combineReducers)({
  *
  * ```ts
  * class MyComponent {
- * 	constructor(state$: Observable<AppState>) {
- * 	  this.booksState$ = state$.let(getBooksState());
+ * 	constructor(state$: Observable<State>) {
+ * 	  this.booksState$ = state$.let(getBooksState);
  * 	}
  * }
  * ```
+ * 
+ * Note that this is equivalent to:
+ * ```ts
+ * class MyComponent {
+ * 	constructor(state$: Observable<State>) {
+ * 	  this.booksState$ = getBooksState(state$);
+ * 	}
+ * }
+ * ```
+ * 
  */
- export function getBooksState() {
-  return (state$: Observable<AppState>) => state$
-    .select(s => s.books);
+ export function getBooksState(state$: Observable<State>) {
+  return state$.select(state => state.books);
 }
 
 /**
@@ -107,80 +139,73 @@ export default compose(storeFreeze, storeLogger(), combineReducers)({
  * first select the books state then we pass the state to the book
  * reducer's getBooks selector, finally returning an observable
  * of search results.
+ * 
+ * Share memoizes the selector functions and published the result. This means
+ * every time you call the selector, you will get back the same result
+ * observable. Each subscription to the resultant observable
+ * is shared across all subscribers.
  */
- export function getBookEntities() {
-   return compose(fromBooks.getBookEntities(), getBooksState());
- }
-
- export function getBook(id: string) {
-   return compose(fromBooks.getBook(id), getBooksState());
- }
-
- export function hasBook(id: string) {
-   return compose(fromBooks.hasBook(id), getBooksState());
- }
-
- export function getBooks(bookIds: string[]) {
-   return compose(fromBooks.getBooks(bookIds), getBooksState());
- }
+ export const getBookEntities = share(compose(fromBooks.getBookEntities, getBooksState));
+ export const getBookIds = share(compose(fromBooks.getBookIds, getBooksState));
+ export const getSelectedBook = share(compose(fromBooks.getSelectedBook, getBooksState));
 
 
 /**
  * Just like with the books selectors, we also have to compose the search
  * reducer's and collection reducer's selectors.
  */
-export function getSearchState() {
- return (state$: Observable<AppState>) => state$
-   .select(s => s.search);
+export function getSearchState(state$: Observable<State>) {
+ return state$.select(s => s.search);
 }
 
-export function getSearchBookIds() {
-  return compose(fromSearch.getBookIds(), getSearchState());
-}
+export const getSearchBookIds = share(compose(fromSearch.getBookIds, getSearchState));
+export const getSearchStatus = share(compose(fromSearch.getStatus, getSearchState));
+export const getSearchQuery = share(compose(fromSearch.getQuery, getSearchState));
+export const getSearchLoading = share(compose(fromSearch.getLoading, getSearchState));
 
-export function getSearchStatus() {
-  return compose(fromSearch.getStatus(), getSearchState());
-}
-
-export function getSearchQuery() {
-  return compose(fromSearch.getQuery(), getSearchState());
-}
 
 /**
  * Some selector functions create joins across parts of state. This selector
  * composes the search result IDs to return an array of books in the store.
  */
-export function getSearchResults() {
-  return (state$: Observable<AppState>) => state$
-    .let(getSearchBookIds())
-    .switchMap(bookIds => state$.let(getBooks(bookIds)));
+export const getSearchResults = share(function (state$: Observable<State>) {
+  return combineLatest<{ [id: string]: Book }, string[]>(
+    state$.let(getBookEntities),
+    state$.let(getSearchBookIds)
+  )
+  .map(([ entities, ids ]) => ids.map(id => entities[id]));
+});
+
+
+
+export function getCollectionState(state$: Observable<State>) {
+  return state$.select(s => s.collection);
 }
 
+export const getCollectionLoaded = share(compose(fromCollection.getLoaded, getCollectionState));
+export const getCollectionLoading = share(compose(fromCollection.getLoading, getCollectionState));
+export const getCollectionBookIds = share(compose(fromCollection.getBookIds, getCollectionState));
 
+export const getBookCollection = share(function (state$: Observable<State>) {
+  return combineLatest<{ [id: string]: Book }, string[]>(
+    state$.let(getBookEntities),
+    state$.let(getCollectionBookIds)
+  )
+  .map(([ entities, ids ]) => ids.map(id => entities[id]));
+});
 
-export function getCollectionState() {
-  return (state$: Observable<AppState>) => state$
-    .select(s => s.collection);
-}
+export const isSelectedBookInCollection = share(function (state$: Observable<State>) {
+  return combineLatest<string[], Book>(
+    state$.let(getCollectionBookIds),
+    state$.let(getSelectedBook)
+  )
+  .map(([ ids, selectedBook ]) => ids.indexOf(selectedBook.id) > -1);
+});
 
-export function getCollectionLoaded() {
-  return compose(fromCollection.getLoaded(), getCollectionState());
-}
+/**
+ * Layout Reducers
+ */
+export const getLayoutState = (state$: Observable<State>) =>
+  state$.select(state => state.layout);
 
-export function getCollectionLoading() {
-  return compose(fromCollection.getLoading(), getCollectionState());
-}
-
-export function getCollectionBookIds() {
-  return compose(fromCollection.getBookIds(), getCollectionState());
-}
-
-export function isBookInCollection(id: string) {
-  return compose(fromCollection.isBookInCollection(id), getCollectionState());
-}
-
-export function getBookCollection() {
-  return (state$: Observable<AppState>) => state$
-    .let(getCollectionBookIds())
-    .switchMap(bookIds => state$.let(getBooks(bookIds)));
-}
+export const getShowSidenav = share(compose(fromLayout.getShowSidenav, getLayoutState));

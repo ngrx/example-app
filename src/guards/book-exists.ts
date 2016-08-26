@@ -1,14 +1,12 @@
 import 'rxjs/add/operator/take';
-import 'rxjs/add/operator/first';
-import 'rxjs/add/observable/concat';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { GoogleBooksService } from '../services/google-books';
-import { AppState, hasBook, getCollectionLoaded } from '../reducers';
-import { BookActions } from '../actions/book';
+import * as fromRoot from '../reducers';
+import { LoadBookAction } from '../actions/book';
 
 
 /**
@@ -19,9 +17,8 @@ import { BookActions } from '../actions/book';
 @Injectable()
 export class BookExistsGuard implements CanActivate {
   constructor(
-    private store: Store<AppState>,
+    private store: Store<fromRoot.State>,
     private googleBooks: GoogleBooksService,
-    private bookActions: BookActions,
     private router: Router
   ) { }
 
@@ -31,7 +28,7 @@ export class BookExistsGuard implements CanActivate {
    * has finished.
    */
   waitForCollectionToLoad() {
-    return this.store.let(getCollectionLoaded())
+    return this.store.let(fromRoot.getCollectionLoaded)
       .filter(loaded => loaded)
       .take(1);
   }
@@ -41,7 +38,9 @@ export class BookExistsGuard implements CanActivate {
    * in the Store
    */
   hasBookInStore(id: string) {
-    return this.store.let(hasBook(id)).take(1);
+    return this.store.let(fromRoot.getBookEntities)
+      .map(entities => !!entities[id])
+      .take(1);
   }
 
   /**
@@ -50,7 +49,7 @@ export class BookExistsGuard implements CanActivate {
    */
   hasBookInApi(id: string) {
     return this.googleBooks.retrieveBook(id)
-      .map(book => this.bookActions.loadBook(book))
+      .map(book => new LoadBookAction(book))
       .do(action => this.store.dispatch(action))
       .map(book => !!book)
       .catch(() => {
@@ -90,6 +89,6 @@ export class BookExistsGuard implements CanActivate {
    */
   canActivate(route: ActivatedRouteSnapshot) {
     return this.waitForCollectionToLoad()
-      .switchMapTo(this.hasBook(route.params['id']));
+      .switchMap(() => this.hasBook(route.params['id']));
   }
 }

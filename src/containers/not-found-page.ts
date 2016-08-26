@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MdButton } from '@angular2-material/button';
 
 @Component({
-  selector: 'not-found-page',
-  directives: [ MD_CARD_DIRECTIVES, MdButton ],
+  selector: 'bc-not-found-page',
   template: `
     <md-card>
       <md-card-title>404: Not Found</md-card-title>
@@ -23,4 +20,4 @@ import { MdButton } from '@angular2-material/button';
     }
   `]
 })
-export class NotFoundPage { }
+export class NotFoundPageComponent { }

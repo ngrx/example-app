@@ -1,21 +1,11 @@
 import { Component, Input } from '@angular/core';
-
-import { Book } from '../models';
-import { AddCommasPipe } from '../pipes/add-commas';
-import { EllipsisPipe } from '../pipes/ellipsis';
-import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import { MD_LIST_DIRECTIVES } from '@angular2-material/list';
+import { Book } from '../models/book';
 
 
 export type BookInput = Book;
 
 @Component({
-  selector: 'book-preview',
-  pipes: [ AddCommasPipe, EllipsisPipe ],
-  directives: [
-    MD_CARD_DIRECTIVES,
-    MD_LIST_DIRECTIVES
-  ],
+  selector: 'bc-book-preview',
   template: `
     <a [routerLink]="['/book', id]">
       <md-card>
@@ -25,14 +15,14 @@ export type BookInput = Book;
           <img md-card-sm-image *ngIf="thumbnail" [src]="thumbnail"/>
         </md-card-title-group>
         <md-card-content>
-          <p *ngIf="description">{{ description | ellipsis }}</p>
+          <p *ngIf="description">{{ description | bcEllipsis }}</p>
         </md-card-content>
-        <md-card-footer>
+        <div class="footer">
           <h5 md-subheader>Written By:</h5>
           <span>
-            {{ authors | addCommas }}
+            {{ authors | bcAddCommas }}
           </span>
-        </md-card-footer>
+        </div>
       </md-card>
     </a>
   `,
@@ -61,7 +51,7 @@ export type BookInput = Book;
       display: inline-block;
       font-size: 13px;
     }
-    md-card-footer {
+    .footer {
       padding-bottom: 25px;
     }
   `]

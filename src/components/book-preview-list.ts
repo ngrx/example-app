@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
+import { BookInput } from './book-preview';
 
-import { BookPreviewComponent, BookInput } from './book-preview';
 
 export type BooksInput = BookInput[];
 
 @Component({
-  selector: 'book-preview-list',
-  directives: [ BookPreviewComponent ],
+  selector: 'bc-book-preview-list',
   template: `
-    <book-preview *ngFor="let book of books" [book]="book"></book-preview>
+    <bc-book-preview *ngFor="let book of books" [book]="book"></bc-book-preview>
   `,
   styles: [`
     :host {

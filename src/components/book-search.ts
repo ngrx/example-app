@@ -1,37 +1,54 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Component, Output, Input } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
+import { Component, Output, Input, EventEmitter } from '@angular/core';
 
 
 export type QueryInput = string;
 export type SearchOutput = string;
 
 @Component({
-  selector: 'book-search',
-  directives: [ MD_INPUT_DIRECTIVES ],
+  selector: 'bc-book-search',
   template: `
-    <md-input placeholder="Search for a book" [value]="query" (keyup)="keyup$.next($event)"></md-input>
+    <md-card>
+      <md-card-title>Find a Book</md-card-title>
+      <md-card-content>
+        <md-input placeholder="Search for a book" [value]="query" (keyup)="search.emit($event.target.value)"></md-input>
+        <md-spinner [class.show]="searching"></md-spinner>
+      </md-card-content>
+    </md-card>
   `,
   styles: [`
+    md-card-title,
+    md-card-content {
+      display: flex;
+      justify-content: center;
+    }
+
     md-input {
       width: 300px;
+    }
+
+    md-card-spinner {
+      padding-left: 60px; // Make room for the spinner
+    }
+
+    md-spinner {
+      width: 30px;
+      height: 30px;
+      position: relative;
+      top: 10px;
+      left: 10px;
+      opacity: 0.0;
+    }
+
+    md-spinner.show {
+      opacity: 1.0;
     }
   `]
 })
 export class BookSearchComponent {
-  /**
-   * Tip: Push events into a subject if you want to handle event streams using
-   * observables.
-   */
-  keyup$ = new Subject<KeyboardEvent>();
-
   @Input() query: QueryInput = '';
-  @Output() search: Observable<SearchOutput> = this.keyup$
-    .debounceTime(300)
-    .map(event => (event.target as HTMLInputElement).value)
-    .distinctUntilChanged();
+  @Input() searching = false;
+  @Output() search = new EventEmitter<string>();
 }

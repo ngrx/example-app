@@ -1,27 +1,32 @@
 import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
-import { Action } from '@ngrx/store';
-
-import { Book } from '../models';
-import { BookActions } from '../actions/book';
+import { BookActions, BookActionTypes } from '../actions/book';
 
 
-export interface SearchState {
+export interface State {
   ids: string[];
   loading: boolean;
   query: string;
 };
 
-const initialState: SearchState = {
+const initialState: State = {
   ids: [],
   loading: false,
   query: ''
 };
 
-export default function(state = initialState, action: Action): SearchState {
+export function reducer(state = initialState, action: BookActions): State {
   switch (action.type) {
-    case BookActions.SEARCH: {
+    case BookActionTypes.SEARCH: {
       const query = action.payload;
+
+      if (query === '') {
+        return {
+          ids: [],
+          loading: false,
+          query
+        };
+      }
 
       return Object.assign({}, state, {
         query,
@@ -29,8 +34,8 @@ export default function(state = initialState, action: Action): SearchState {
       });
     }
 
-    case BookActions.SEARCH_COMPLETE: {
-      const books: Book[] = action.payload;
+    case BookActionTypes.SEARCH_COMPLETE: {
+      const books = action.payload;
 
       return {
         ids: books.map(book => book.id),
@@ -45,17 +50,18 @@ export default function(state = initialState, action: Action): SearchState {
   }
 }
 
-export function getStatus() {
-  return (state$: Observable<SearchState>) => state$
-    .select(s => s.loading);
+export function getStatus(state$: Observable<State>) {
+  return state$.select(state => state.loading);
 }
 
-export function getBookIds() {
-  return (state$: Observable<SearchState>) => state$
-    .select(s => s.ids);
+export function getBookIds(state$: Observable<State>) {
+  return state$.select(state => state.ids);
 }
 
-export function getQuery() {
-  return (state$: Observable<SearchState>) => state$
-    .select(s => s.query);
+export function getQuery(state$: Observable<State>) {
+  return state$.select(state => state.query);
+}
+
+export function getLoading(state$: Observable<State>) {
+  return state$.select(state => state.loading);
 }
