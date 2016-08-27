@@ -11,6 +11,7 @@ This app is a book collection manager. Using the Google Books API, the user can 
  - [ngrx/db](https://github.com/ngrx/db) - RxJS powered IndexedDB for Angular2 apps
  - [ngrx/store-devtools](https://github.com/ngrx/store-devtools) - Instrumentation for @ngrx/store enabling time-travel debugging
  - [ngrx/store-log-monitor](https://github.com/ngrx/store-log-monitor) - A port of redux-devtools-log-monitor for Angular 2 and @ngrx/store
+ - [codewareio/ngrx-store-freeze](https://github.com/codewareio/ngrx-store-freeze) - A @ngrx/store meta reducer that prevents state from being mutated
 
 ### Quick start
 
