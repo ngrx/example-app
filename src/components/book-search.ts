@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { Component, Output, Input } from '@angular/core';
+import { Component, Output, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
@@ -20,7 +20,8 @@ export type SearchOutput = string;
     md-input {
       width: 300px;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookSearchComponent {
   /**

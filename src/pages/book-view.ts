@@ -1,7 +1,7 @@
 import '@ngrx/core/add/operator/select';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
@@ -27,7 +27,8 @@ import {
       (add)="addToCollection($event)"
       (remove)="removeFromCollection($event)">
     </book-detail>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookViewPage {
   book$: Observable<BookInput>;
