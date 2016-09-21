@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/let';
 import 'rxjs/add/operator/take';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -33,7 +33,8 @@ import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
       display: flex;
       justify-content: center;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookFindPage {
   searchQuery$: Observable<QueryInput>;

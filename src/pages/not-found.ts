@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MdButton } from '@angular2-material/button';
@@ -21,6 +21,7 @@ import { MdButton } from '@angular2-material/button';
     :host {
       text-align: center;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotFoundPage { }

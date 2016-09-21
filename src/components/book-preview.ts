@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Book } from '../models';
 import { AddCommasPipe } from '../pipes/add-commas';
@@ -64,7 +64,8 @@ export type BookInput = Book;
     md-card-footer {
       padding-bottom: 25px;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookPreviewComponent {
   @Input() book: BookInput;

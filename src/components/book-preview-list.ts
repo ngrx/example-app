@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { BookPreviewComponent, BookInput } from './book-preview';
 
@@ -16,7 +16,8 @@ export type BooksInput = BookInput[];
       flex-wrap: wrap;
       justify-content: center;
     }
-  `]
+  `],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BookPreviewListComponent {
   @Input() books: BooksInput;
