@@ -14,7 +14,8 @@ export const ActionTypes = {
   SEARCH:           type('[Book] Search'),
   SEARCH_COMPLETE:  type('[Book] Search Complete'),
   LOAD:             type('[Book] Load'),
-  SELECT:           type('[Book] Select'),
+  LOAD_SUCCESS:     type('[Book] Load Success'),
+  LOAD_FAIL:        type('[Book] Load Fail'),
 };
 
 
@@ -37,16 +38,26 @@ export class SearchCompleteAction implements Action {
   constructor(public payload: Book[]) { }
 }
 
+
+/**
+ * Book Load Actions
+ */
 export class LoadAction implements Action {
   type = ActionTypes.LOAD;
+
+  constructor(public payload: string) { }
+}
+
+export class LoadSuccessAction implements Action {
+  type = ActionTypes.LOAD_SUCCESS;
 
   constructor(public payload: Book) { }
 }
 
-export class SelectAction implements Action {
-  type = ActionTypes.SELECT;
+export class LoadFailAction implements Action {
+  type = ActionTypes.LOAD_FAIL;
 
-  constructor(public payload: string) { }
+  constructor(public payload: any) { }
 }
 
 /**
@@ -57,4 +68,5 @@ export type Actions
   = SearchAction
   | SearchCompleteAction
   | LoadAction
-  | SelectAction;
+  | LoadSuccessAction
+  | LoadFailAction

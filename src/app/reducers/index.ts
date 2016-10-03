@@ -136,6 +136,7 @@ export function reducer(state: any, action: any) {
  export const getBookEntities = compose(fromBooks.getBookEntities, getBooksState);
  export const getBookIds = compose(fromBooks.getBookIds, getBooksState);
  export const getSelectedBook = compose(fromBooks.getSelectedBook, getBooksState);
+ export const isBookLoading = compose(fromBooks.isLoading, getBooksState);
 
 
 /**
@@ -187,7 +188,7 @@ export const isSelectedBookInCollection = function (state$: Observable<State>) {
     state$.let(getCollectionBookIds),
     state$.let(getSelectedBook)
   )
-  .map(([ ids, selectedBook ]) => ids.indexOf(selectedBook.id) > -1);
+  .map(([ ids, selectedBook ]) => selectedBook && ids.indexOf(selectedBook.id) > -1);
 };
 
 /**

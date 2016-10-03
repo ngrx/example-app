@@ -16,7 +16,7 @@ import * as layout from '../actions/layout';
         <bc-nav-item (activate)="closeSidenav()" routerLink="/" icon="book" hint="View your book collection">
           My Collection
         </bc-nav-item>
-        <bc-nav-item (activate)="closeSidenav()" routerLink="/book/find" icon="search" hint="Find your next book!">
+        <bc-nav-item (activate)="closeSidenav()" routerLink="/book" icon="search" hint="Find your next book!">
           My Collection
         </bc-nav-item>
       </bc-sidenav>
@@ -24,7 +24,14 @@ import * as layout from '../actions/layout';
         Book Collection
       </bc-toolbar>
 
-      <router-outlet></router-outlet>
+      <bc-collection-page *routerMatch="'/'; exact: true"></bc-collection-page>
+
+      <bc-find-book-page *routerMatch="'/book'; exact: true"></bc-find-book-page>
+
+      <bc-view-book-page *routerMatch="'/book/:id'; exact: true; let params = params" [id]="params.id"></bc-view-book-page>
+
+      <bc-not-found-page *routerMiss></bc-not-found-page>
+      
     </bc-layout>
   `
 })

@@ -1,7 +1,6 @@
 import { NgModule, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -9,6 +8,7 @@ import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MaterialModule } from '@angular/material';
+import { RouterModule } from '@ngrx/router';
 
 import { ComponentsModule } from './components';
 import { BookEffects } from './effects/book';
@@ -24,7 +24,6 @@ import { NotFoundPageComponent } from './containers/not-found-page';
 
 import { GoogleBooksService } from './services/google-books';
 
-import { routes } from './routes';
 import { reducer } from './reducers';
 import { schema } from './db';
 
@@ -36,7 +35,7 @@ import { schema } from './db';
     BrowserModule,
     MaterialModule.forRoot(),
     ComponentsModule,
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(),
 
     /**
      * StoreModule.provideStore is imported once in the root module, accepting a reducer
@@ -51,7 +50,7 @@ import { schema } from './db';
      * @ngrx/router-store keeps router state up-to-date in the store and uses
      * the store as the single source of truth for the router's state.
      */
-    RouterStoreModule.connectRouter(),
+    // RouterStoreModule.connectRouter(),
 
     /**
      * Store devtools instrument the store retaining past versions of state

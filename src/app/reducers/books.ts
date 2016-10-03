@@ -11,12 +11,14 @@ import * as collection from '../actions/collection';
 export interface State {
   ids: string[];
   entities: { [id: string]: Book };
+  loading: boolean;
   selectedBookId: string | null;
 };
 
 const initialState: State = {
   ids: [],
   entities: {},
+  loading: false,
   selectedBookId: null,
 };
 
@@ -37,14 +39,27 @@ export function reducer(state = initialState, action: book.Actions | collection.
       return {
         ids: [ ...state.ids, ...newBookIds ],
         entities: Object.assign({}, state.entities, newBookEntities),
+        loading: state.loading,
         selectedBookId: state.selectedBookId
       };
     }
 
     case book.ActionTypes.LOAD: {
+      const id = action.payload;
+      const alreadyHasBook = state.ids.indexOf(id) !== -1;
+
+      return {
+        ids: state.ids,
+        entities: state.entities,
+        selectedBookId: id,
+        loading: !alreadyHasBook
+      };
+    }
+
+    case book.ActionTypes.LOAD_SUCCESS: {
       const book = action.payload;
 
-      if (state.ids.indexOf(book.id) > -1) {
+      if (state.ids.indexOf(book.id) !== -1) {
         return state;
       }
 
@@ -53,15 +68,17 @@ export function reducer(state = initialState, action: book.Actions | collection.
         entities: Object.assign({}, state.entities, {
           [book.id]: book
         }),
+        loading: false,
         selectedBookId: state.selectedBookId
       };
     }
 
-    case book.ActionTypes.SELECT: {
+    case book.ActionTypes.LOAD_FAIL: {
       return {
         ids: state.ids,
         entities: state.entities,
-        selectedBookId: action.payload
+        selectedBookId: state.selectedBookId,
+        loading: false
       };
     }
 
@@ -98,6 +115,10 @@ export function getSelectedBook(state$: Observable<State>) {
     state$.let(getSelectedBookId)
   )
   .map(([ entities, selectedBookId ]) => entities[selectedBookId]);
+}
+
+export function isLoading(state$: Observable<State>) {
+  return state$.select(state => state.loading);
 }
 
 export function getAllBooks(state$: Observable<State>) {
