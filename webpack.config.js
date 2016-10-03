@@ -78,7 +78,11 @@ module.exports = function (env = {}) {
       pathinfo: !env.prod
     },
     resolve: {
-      extensions: ['.ts', '.js']
+      extensions: ['.ts', '.js'],
+      modules: [
+        'node_modules',
+        path.resolve(__dirname, 'src')
+      ]
     },
     module: {
       rules: loaders.common.concat(env.prod ? loaders.production : loaders.development)

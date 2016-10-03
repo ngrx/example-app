@@ -18,8 +18,12 @@
     "target": "es5",
     "skipLibCheck": true,
     "types": [
-      "hammerjs"
-    ]
+      "hammerjs",
+      "path-to-regexp"
+    ],
+    "paths": {
+      "@ngrx/router": ["src/@ngrx/router"]
+    }
   },
   "exclude": [
     "node_modules"
