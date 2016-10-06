@@ -2,12 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {ForkCheckerPlugin} = require('awesome-typescript-loader');
-const {NgcWebpackPlugin} = require('@ngtools/webpack');
 
 
 module.exports = function (env = {}) {
   const loaders = {
     common: [
+      {
+        enforce: 'pre',
+        test: /\.ts$/,
+        loader: 'tslint',
+        exclude: /node_modules/
+      },
       {
         test: /\.html$/,
         loader: 'html-loader',
@@ -30,7 +35,7 @@ module.exports = function (env = {}) {
       }
     ],
     production: [
-      { test: /\.ts$/, loader: '@ngtools/webpack', exclude: [/\.(spec|e2e)\.ts$/] }
+
     ]
   };
 
@@ -58,12 +63,7 @@ module.exports = function (env = {}) {
       )
     ],
     production: [
-      /*new NgcWebpackPlugin({
-        project: path.resolve(__dirname, 'tsconfig.json'),
-        baseDir: __dirname,
-        entryModule: path.resolve(__dirname, 'src/app/app.module#AppModule'),
-        genDir: path.join(__dirname, 'out', 'ngfactory')
-      })*/
+
     ]
   };
 
