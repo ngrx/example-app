@@ -4,8 +4,8 @@
   "description": "Example application demoing the @ngrx platform",
   "main": "index.ts",
   "scripts": {
-    "build": "webpack -p --env.prod",
-    "start": "webpack-dev-server"
+    "build": "node_modules/.bin/ngc -p tsconfig.aot.json && webpack -p --env.prod",
+    "start": "webpack-dev-server -d --progress --no-info"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
     "@angular/core": "^2.0.0",
     "@angular/forms": "^2.0.0",
     "@angular/http": "^2.0.0",
-    "@angular/material": "^2.0.0-alpha.9-3",
+    "@angular/material": "2.0.0-alpha.9-3",
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/platform-server": "^2.0.0",

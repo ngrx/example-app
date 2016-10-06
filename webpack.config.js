@@ -58,18 +58,18 @@ module.exports = function (env = {}) {
       )
     ],
     production: [
-      new NgcWebpackPlugin({
+      /*new NgcWebpackPlugin({
         project: path.resolve(__dirname, 'tsconfig.json'),
         baseDir: __dirname,
         entryModule: path.resolve(__dirname, 'src/app/app.module#AppModule'),
         genDir: path.join(__dirname, 'out', 'ngfactory')
-      })
+      })*/
     ]
   };
 
   return {
     entry: {
-      main: './src/index.ts'
+      main: env.prod ? './src/index.aot.ts' : './src/index.ts'
     },
     devtool: env.prod ? 'source-map' : 'eval',
     output: {
@@ -78,7 +78,11 @@ module.exports = function (env = {}) {
       pathinfo: !env.prod
     },
     resolve: {
-      extensions: ['.ts', '.js']
+      extensions: ['.ts', '.js'],
+      modules: [
+        'node_modules',
+        path.resolve(__dirname, 'src')
+      ]
     },
     module: {
       rules: loaders.common.concat(env.prod ? loaders.production : loaders.development)
