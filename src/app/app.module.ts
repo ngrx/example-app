@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
@@ -62,6 +63,20 @@ import { schema } from './db';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+
+    /**
+     * @ngrx/store-log-moinitor
+     * without extension, add:
+     * <ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommand="ctrl-m"></ngrx-store-log-monitor>
+     * to AppComponent
+     */
+    /*StoreDevtoolsModule.instrumentStore({
+      monitor: useLogMonitor({
+        visible: true,
+        position: 'right'
+      })
+    }),
+    StoreLogMonitorModule,*/
 
     /**
      * EffectsModule.run() sets up the effects class to be initialized

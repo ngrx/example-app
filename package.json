@@ -45,6 +45,7 @@
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
+    "@ngrx/store-log-monitor": "^3.0.2",
     "@types/hammerjs": "^2.0.32",
     "awesome-typescript-loader": "^2.2.4",
     "codelyzer": "1.0.0-beta.0",
