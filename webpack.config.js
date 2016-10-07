@@ -11,7 +11,10 @@ module.exports = function (env = {}) {
         enforce: 'pre',
         test: /\.ts$/,
         loader: 'tslint',
-        exclude: /node_modules/
+        exclude: [
+          /node_modules/,
+          /aot/
+        ]
       },
       {
         test: /\.html$/,
@@ -35,7 +38,10 @@ module.exports = function (env = {}) {
       }
     ],
     production: [
-
+      {
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader'
+      }
     ]
   };
 
@@ -71,7 +77,7 @@ module.exports = function (env = {}) {
     entry: {
       main: env.prod ? './src/index.aot.ts' : './src/index.ts'
     },
-    devtool: env.prod ? 'source-map' : 'eval',
+    devtool: env.prod ? 'inline-source-map' : 'eval',
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
