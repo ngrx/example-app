@@ -8,7 +8,6 @@ import * as fromRoot from '../reducers';
 import * as book from '../actions/book';
 import { Book } from '../models/book';
 
-
 @Component({
   selector: 'bc-find-book-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -18,9 +17,9 @@ import { Book } from '../models/book';
   `
 })
 export class FindBookPageComponent {
-  searchQuery$: Observable<string>;
-  books$: Observable<Book[]>;
-  loading$: Observable<boolean>;
+  public searchQuery$: Observable<string>;
+  public books$: Observable<Book[]>;
+  public loading$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.searchQuery$ = store.let(fromRoot.getSearchQuery).take(1);
@@ -28,7 +27,7 @@ export class FindBookPageComponent {
     this.loading$ = store.let(fromRoot.getSearchLoading);
   }
 
-  search(query: string) {
+  public search(query: string) {
     this.store.dispatch(new book.SearchAction(query));
   }
 }

@@ -1,20 +1,20 @@
 import { Action } from '@ngrx/store';
-import { type } from '../util';
+import { actionType } from '../util';
+
+/* tslint:disable:no-reserved-keywords */
 
 export const ActionTypes = {
-  OPEN_SIDENAV:   type('[Layout] Open Sidenav'),
-  CLOSE_SIDENAV:  type('[Layout] Close Sidenav')
+  OPEN_SIDENAV:   actionType('[Layout] Open Sidenav'),
+  CLOSE_SIDENAV:  actionType('[Layout] Close Sidenav')
 };
 
-
 export class OpenSidenavAction implements Action {
-  type = ActionTypes.OPEN_SIDENAV;
+  public type = ActionTypes.OPEN_SIDENAV;
 }
 
 export class CloseSidenavAction implements Action {
-  type = ActionTypes.CLOSE_SIDENAV;
+  public type = ActionTypes.CLOSE_SIDENAV;
 }
-
 
 export type Actions
   = OpenSidenavAction

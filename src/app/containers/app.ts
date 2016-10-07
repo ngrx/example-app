@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../reducers';
 import * as layout from '../actions/layout';
 
-
 @Component({
   selector: 'book-collection-app',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -29,7 +28,7 @@ import * as layout from '../actions/layout';
   `
 })
 export class AppComponent {
-  showSidenav$: Observable<boolean>;
+  public showSidenav$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) {
     /**
@@ -42,7 +41,7 @@ export class AppComponent {
     this.showSidenav$ = this.store.let(fromRoot.getShowSidenav);
   }
 
-  closeSidenav() {
+  public closeSidenav() {
     /**
      * All state updates are handled through dispatched actions in 'container'
      * components. This provides a clear, reproducible history of state
@@ -52,7 +51,7 @@ export class AppComponent {
     this.store.dispatch(new layout.CloseSidenavAction());
   }
 
-  openSidenav() {
+  public openSidenav() {
     this.store.dispatch(new layout.OpenSidenavAction());
   }
 }

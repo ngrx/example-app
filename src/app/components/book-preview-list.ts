@@ -15,5 +15,5 @@ import { Book } from '../models/book';
   `]
 })
 export class BookPreviewListComponent {
-  @Input() books: Book[];
+  @Input() public books: Book[];
 }

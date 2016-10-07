@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Book } from '../models/book';
 
-
 @Component({
   selector: 'bc-book-detail',
   template: `
@@ -68,11 +67,10 @@ export class BookDetailComponent {
    *
    * More on 'smart' and 'presentational' components: https://gist.github.com/btroncone/a6e4347326749f938510#utilizing-container-components
    */
-  @Input() book: Book;
-  @Input() inCollection: boolean;
-  @Output() add = new EventEmitter<Book>();
-  @Output() remove = new EventEmitter<Book>();
-
+  @Input() public book: Book;
+  @Input() public inCollection: boolean;
+  @Output() public add = new EventEmitter<Book>();
+  @Output() public remove = new EventEmitter<Book>();
 
   /**
    * Tip: Utilize getters to keep templates clean

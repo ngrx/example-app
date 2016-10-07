@@ -2,16 +2,17 @@ import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import * as layout from '../actions/layout';
 
+/* tslint:disable:no-switch-case-fall-through */
 
 export interface State {
   showSidenav: boolean;
 }
 
 const initialState: State = {
-  showSidenav: false,
+  showSidenav: false
 };
 
-export function reducer(state = initialState, action: layout.Actions): State {
+export function reducer(state = initialState, action?: layout.Actions): State {
   switch (action.type) {
     case layout.ActionTypes.CLOSE_SIDENAV:
       return {

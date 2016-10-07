@@ -1,4 +1,4 @@
-import { NgModule, } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -27,8 +27,6 @@ import { GoogleBooksService } from './services/google-books';
 import { routes } from './routes';
 import { reducer } from './reducers';
 import { schema } from './db';
-
-
 
 @NgModule({
   imports: [
@@ -78,7 +76,7 @@ import { schema } from './db';
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
      */
-    DBModule.provideDB(schema),
+    DBModule.provideDB(schema)
   ],
   declarations: [
     AppComponent,

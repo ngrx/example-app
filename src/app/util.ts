@@ -8,8 +8,12 @@
  * are unique.
  */
 
+/* tslint:disable:prefer-const */
+
 let typeCache: { [label: string]: boolean } = {};
-export function type<T>(label: T | ''): T {
+
+export function actionType<T>(label: T | ''): T {
+
   if (typeCache[<string>label]) {
     throw new Error(`Action type "${label}" is not unqiue"`);
   }

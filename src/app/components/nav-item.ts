@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-
 @Component({
   selector: 'bc-nav-item',
   template: `
@@ -17,8 +16,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   `]
 })
 export class NavItemComponent {
-  @Input() icon: string = '';
-  @Input() hint: string = '';
-  @Input() routerLink: string | any[] = '/';
-  @Output() activate = new EventEmitter();
+  @Input() public icon: string = '';
+  @Input() public hint: string = '';
+  @Input() public routerLink: string | any[] = '/';
+  @Output() public activate = new EventEmitter();
 }

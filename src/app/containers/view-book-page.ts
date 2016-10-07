@@ -26,7 +26,7 @@ import * as book from '../actions/book';
   `
 })
 export class ViewBookPageComponent implements OnDestroy {
-  actionsSubscription: Subscription;
+  public actionsSubscription: Subscription;
 
   constructor(private store: Store<fromRoot.State>, route: ActivatedRoute) {
     this.actionsSubscription = route.params
@@ -35,7 +35,7 @@ export class ViewBookPageComponent implements OnDestroy {
       .subscribe(store);
   }
 
-  ngOnDestroy() {
+  public ngOnDestroy() {
     this.actionsSubscription.unsubscribe();
   }
 }

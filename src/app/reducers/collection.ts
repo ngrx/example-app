@@ -3,12 +3,13 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import * as collection from '../actions/collection';
 
+/* tslint:disable:no-switch-case-fall-through */
 
 export interface State {
   loaded: boolean;
   loading: boolean;
   ids: string[];
-};
+}
 
 const initialState: State = {
   loaded: false,
@@ -16,7 +17,7 @@ const initialState: State = {
   ids: []
 };
 
-export function reducer(state = initialState, action: collection.Actions): State {
+export function reducer(state = initialState, action?: collection.Actions): State {
   switch (action.type) {
     case collection.ActionTypes.LOAD: {
       return Object.assign({}, state, {
@@ -61,7 +62,6 @@ export function reducer(state = initialState, action: collection.Actions): State
     }
   }
 }
-
 
 export function getLoaded(state$: Observable<State>) {
   return state$.select(s => s.loaded);

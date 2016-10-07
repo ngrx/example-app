@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 
 import { Book } from '../models/book';
 
-
 @Component({
   selector: 'bc-book-authors',
   template: `
@@ -18,7 +17,7 @@ import { Book } from '../models/book';
   `]
 })
 export class BookAuthorsComponent {
-  @Input() book: Book;
+  @Input() public book: Book;
 
   get authors() {
     return this.book.volumeInfo.authors;

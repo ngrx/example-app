@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Book } from '../models/book';
 
-
 @Component({
   selector: 'bc-book-preview',
   template: `
@@ -52,7 +51,7 @@ import { Book } from '../models/book';
   `]
 })
 export class BookPreviewComponent {
-  @Input() book: Book;
+  @Input() public book: Book;
 
   get id() {
     return this.book.id;
