@@ -2,12 +2,13 @@ import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import * as book from '../actions/book';
 
+/* tslint:disable:no-switch-case-fall-through */
 
 export interface State {
   ids: string[];
   loading: boolean;
   query: string;
-};
+}
 
 const initialState: State = {
   ids: [],
@@ -15,7 +16,7 @@ const initialState: State = {
   query: ''
 };
 
-export function reducer(state = initialState, action: book.Actions): State {
+export function reducer(state = initialState, action?: book.Actions): State {
   switch (action.type) {
     case book.ActionTypes.SEARCH: {
       const query = action.payload;

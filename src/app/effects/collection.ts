@@ -15,7 +15,6 @@ import { of } from 'rxjs/observable/of';
 import * as collection from '../actions/collection';
 import { Book } from '../models/book';
 
-
 @Injectable()
 export class CollectionEffects {
   constructor(private actions$: Actions, private db: Database) { }
@@ -31,7 +30,7 @@ export class CollectionEffects {
    * effect easier to test.
    */
   @Effect({ dispatch: false })
-  openDB$: Observable<any> = defer(() => {
+  public openDB$: Observable<any> = defer(() => {
     return this.db.open('books_app');
   });
 
@@ -40,7 +39,7 @@ export class CollectionEffects {
    * the effect immediately on startup.
    */
   @Effect()
-  loadCollection$: Observable<Action> = this.actions$
+  public loadCollection$: Observable<Action> = this.actions$
     .ofType(collection.ActionTypes.LOAD)
     .startWith(new collection.LoadAction())
     .switchMap(() =>
@@ -51,7 +50,7 @@ export class CollectionEffects {
     );
 
   @Effect()
-  addBookToCollection$: Observable<Action> = this.actions$
+  public addBookToCollection$: Observable<Action> = this.actions$
     .ofType(collection.ActionTypes.ADD_BOOK)
     .map((action: collection.AddBookAction) => action.payload)
     .mergeMap(book =>
@@ -60,9 +59,8 @@ export class CollectionEffects {
         .catch(() => of(new collection.AddBookFailAction(book)))
     );
 
-
   @Effect()
-  removeBookFromCollection$: Observable<Action> = this.actions$
+  public removeBookFromCollection$: Observable<Action> = this.actions$
     .ofType(collection.ActionTypes.REMOVE_BOOK)
     .map((action: collection.RemoveBookAction) => action.payload)
     .mergeMap(book =>

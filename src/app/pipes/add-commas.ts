@@ -1,9 +1,10 @@
-import { Pipe } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
+/* tslint:disable:no-switch-case-fall-through */
 
 @Pipe({ name: 'bcAddCommas' })
-export class AddCommasPipe {
-  transform(authors: null | string[]) {
+export class AddCommasPipe implements PipeTransform {
+  public transform(authors: null | string[]) {
     if (!authors) return '';
 
     switch (authors.length) {

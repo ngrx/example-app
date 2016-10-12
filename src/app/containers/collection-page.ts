@@ -6,7 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import * as fromRoot from '../reducers';
 import { Book } from '../models/book';
 
-
 @Component({
   selector: 'bc-collection-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +30,7 @@ import { Book } from '../models/book';
   `]
 })
 export class CollectionPageComponent {
-  books$: Observable<Book[]>;
+  public books$: Observable<Book[]>;
 
   constructor(store: Store<fromRoot.State>) {
     this.books$ = store.let(fromRoot.getBookCollection);

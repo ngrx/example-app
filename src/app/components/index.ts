@@ -16,7 +16,6 @@ import { ToolbarComponent } from './toolbar';
 
 import { PipesModule } from '../pipes';
 
-
 export const COMPONENTS = [
   BookAuthorsComponent,
   BookDetailComponent,
@@ -26,9 +25,8 @@ export const COMPONENTS = [
   LayoutComponent,
   NavItemComponent,
   SidenavComponent,
-  ToolbarComponent,
+  ToolbarComponent
 ];
-
 
 @NgModule({
   imports: [
@@ -36,7 +34,7 @@ export const COMPONENTS = [
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
-    PipesModule,
+    PipesModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS

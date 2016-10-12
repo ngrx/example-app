@@ -14,7 +14,6 @@ import { of } from 'rxjs/observable/of';
 import { GoogleBooksService } from '../services/google-books';
 import * as book from '../actions/book';
 
-
 /**
  * Effects offer a way to isolate and easily test side-effects within your
  * application. StateUpdates is an observable of the latest state and
@@ -33,9 +32,8 @@ import * as book from '../actions/book';
 export class BookEffects {
   constructor(private actions$: Actions, private googleBooks: GoogleBooksService) { }
 
-
   @Effect()
-  search$: Observable<Action> = this.actions$
+  public search$: Observable<Action> = this.actions$
     .ofType(book.ActionTypes.SEARCH)
     .debounceTime(300)
     .map<string>(action => action.payload)

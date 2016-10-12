@@ -1,4 +1,4 @@
-import { NgModule, } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { DBModule } from '@ngrx/db';
 import { RouterStoreModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+// import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
@@ -27,8 +28,6 @@ import { GoogleBooksService } from './services/google-books';
 import { routes } from './routes';
 import { reducer } from './reducers';
 import { schema } from './db';
-
-
 
 @NgModule({
   imports: [
@@ -57,13 +56,27 @@ import { schema } from './db';
      * Store devtools instrument the store retaining past versions of state
      * and recalculating new states. This enables powerful time-travel
      * debugging.
-     * 
+     *
      * To use the debugger, install the Redux Devtools extension for either
      * Chrome or Firefox
-     * 
+     *
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrumentOnlyWithExtension(),
+
+    /**
+     * @ngrx/store-log-moinitor
+     * without extension, add:
+     * <ngrx-store-log-monitor toggleCommand="ctrl-h" positionCommand="ctrl-m"></ngrx-store-log-monitor>
+     * to AppComponent
+     */
+    /*StoreDevtoolsModule.instrumentStore({
+      monitor: useLogMonitor({
+        visible: true,
+        position: 'right'
+      })
+    }),
+    StoreLogMonitorModule,*/
 
     /**
      * EffectsModule.run() sets up the effects class to be initialized
@@ -78,7 +91,7 @@ import { schema } from './db';
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
      * service available.
      */
-    DBModule.provideDB(schema),
+    DBModule.provideDB(schema)
   ],
   declarations: [
     AppComponent,

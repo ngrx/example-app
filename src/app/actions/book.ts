@@ -1,6 +1,8 @@
 import { Action } from '@ngrx/store';
 import { Book } from '../models/book';
-import { type } from '../util';
+import { actionType } from '../util';
+
+/* tslint:disable:no-reserved-keywords */
 
 /**
  * For each action type in an action group, make a simple
@@ -11,12 +13,11 @@ import { type } from '../util';
  * action types in the application are unique. 
  */
 export const ActionTypes = {
-  SEARCH:           type('[Book] Search'),
-  SEARCH_COMPLETE:  type('[Book] Search Complete'),
-  LOAD:             type('[Book] Load'),
-  SELECT:           type('[Book] Select'),
+  SEARCH:           actionType('[Book] Search'),
+  SEARCH_COMPLETE:  actionType('[Book] Search Complete'),
+  LOAD:             actionType('[Book] Load'),
+  SELECT:           actionType('[Book] Select')
 };
-
 
 /**
  * Every action is comprised of at least a type and an optional
@@ -26,25 +27,25 @@ export const ActionTypes = {
  * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
 export class SearchAction implements Action {
-  type = ActionTypes.SEARCH;
+  public type = ActionTypes.SEARCH;
 
   constructor(public payload: string) { }
 }
 
 export class SearchCompleteAction implements Action {
-  type = ActionTypes.SEARCH_COMPLETE;
+  public type = ActionTypes.SEARCH_COMPLETE;
 
   constructor(public payload: Book[]) { }
 }
 
 export class LoadAction implements Action {
-  type = ActionTypes.LOAD;
+  public type = ActionTypes.LOAD;
 
   constructor(public payload: Book) { }
 }
 
 export class SelectAction implements Action {
-  type = ActionTypes.SELECT;
+  public type = ActionTypes.SELECT;
 
   constructor(public payload: string) { }
 }

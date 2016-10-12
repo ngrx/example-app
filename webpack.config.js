@@ -2,12 +2,20 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {ForkCheckerPlugin} = require('awesome-typescript-loader');
-const {NgcWebpackPlugin} = require('@ngtools/webpack');
 
 
 module.exports = function (env = {}) {
   const loaders = {
     common: [
+      {
+        enforce: 'pre',
+        test: /\.ts$/,
+        loader: 'tslint',
+        exclude: [
+          /node_modules/,
+          /aot/
+        ]
+      },
       {
         test: /\.html$/,
         loader: 'html-loader',
@@ -30,7 +38,10 @@ module.exports = function (env = {}) {
       }
     ],
     production: [
-      { test: /\.ts$/, loader: '@ngtools/webpack', exclude: [/\.(spec|e2e)\.ts$/] }
+      {
+        test: /\.ts$/,
+        loader: 'awesome-typescript-loader'
+      }
     ]
   };
 
@@ -58,27 +69,26 @@ module.exports = function (env = {}) {
       )
     ],
     production: [
-      new NgcWebpackPlugin({
-        project: path.resolve(__dirname, 'tsconfig.json'),
-        baseDir: __dirname,
-        entryModule: path.resolve(__dirname, 'src/app/app.module#AppModule'),
-        genDir: path.join(__dirname, 'out', 'ngfactory')
-      })
+
     ]
   };
 
   return {
     entry: {
-      main: './src/index.ts'
+      main: env.prod ? './src/index.aot.ts' : './src/index.ts'
     },
-    devtool: env.prod ? 'source-map' : 'eval',
+    devtool: env.prod ? 'inline-source-map' : 'eval',
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
       pathinfo: !env.prod
     },
     resolve: {
-      extensions: ['.ts', '.js']
+      extensions: ['.ts', '.js'],
+      modules: [
+        'node_modules',
+        path.resolve(__dirname, 'src')
+      ]
     },
     module: {
       rules: loaders.common.concat(env.prod ? loaders.production : loaders.development)

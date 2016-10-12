@@ -7,20 +7,21 @@ import { Book } from '../models/book';
 import * as book from '../actions/book';
 import * as collection from '../actions/collection';
 
+/* tslint:disable:no-switch-case-fall-through */
 
 export interface State {
   ids: string[];
   entities: { [id: string]: Book };
   selectedBookId: string | null;
-};
+}
 
 const initialState: State = {
   ids: [],
   entities: {},
-  selectedBookId: null,
+  selectedBookId: null
 };
 
-export function reducer(state = initialState, action: book.Actions | collection.Actions): State {
+export function reducer(state = initialState, action?: book.Actions | collection.Actions): State {
   switch (action.type) {
     case book.ActionTypes.SEARCH_COMPLETE:
     case collection.ActionTypes.LOAD_SUCCESS: {
@@ -28,11 +29,13 @@ export function reducer(state = initialState, action: book.Actions | collection.
       const newBooks = books.filter(book => !state.entities[book.id]);
 
       const newBookIds = newBooks.map(book => book.id);
-      const newBookEntities = newBooks.reduce((entities: { [id: string]: Book }, book: Book) => {
-        return Object.assign(entities, {
-          [book.id]: book
-        });
-      }, {});
+      const newBookEntities = newBooks.reduce(
+        (entities: { [id: string]: Book }, book: Book) => {
+          return Object.assign(entities, {
+            [book.id]: book
+          });
+        },
+        {});
 
       return {
         ids: [ ...state.ids, ...newBookIds ],
