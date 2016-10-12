@@ -48,7 +48,7 @@
     "@ngrx/store-log-monitor": "^3.0.2",
     "@types/hammerjs": "^2.0.32",
     "awesome-typescript-loader": "^2.2.4",
-    "codelyzer": "1.0.0-beta.0",
+    "codelyzer": "1.0.0-beta.1",
     "cpy-cli": "^1.0.1",
     "css-loader": "^0.25.0",
     "html-loader": "^0.4.4",
