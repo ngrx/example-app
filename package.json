@@ -28,7 +28,7 @@
     "@angular/core": "^2.0.0",
     "@angular/forms": "^2.0.0",
     "@angular/http": "^2.0.0",
-    "@angular/material": "2.0.0-alpha.9-3",
+    "@angular/material": "^2.0.0-alpha.9-3",
     "@angular/platform-browser": "^2.0.0",
     "@angular/platform-browser-dynamic": "^2.0.0",
     "@angular/platform-server": "^2.0.0",
@@ -41,7 +41,7 @@
     "@ngrx/store-devtools": "^3.1.0",
     "core-js": "^2.2.2",
     "ngrx-store-freeze": "^0.1.0",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
