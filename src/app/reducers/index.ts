@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { ActionReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
+import { environment } from '../../environments/environment';
 import { Book } from '../models/book';
 
 /**
@@ -75,11 +76,11 @@ const reducers = {
   router: fromRouter.routerReducer,
 };
 
-const developmentReducer = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer = combineReducers(reducers);
+const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
+const productionReducer: ActionReducer<State> = combineReducers(reducers);
 
 export function reducer(state: any, action: any) {
-  if (PROD) {
+  if (environment.production) {
     return productionReducer(state, action);
   }
   else {
@@ -103,7 +104,7 @@ export function reducer(state: any, action: any) {
  * 	}
  * }
  * ```
- * 
+ *
  * Note that this is equivalent to:
  * ```ts
  * class MyComponent {
@@ -112,7 +113,7 @@ export function reducer(state: any, action: any) {
  * 	}
  * }
  * ```
- * 
+ *
  */
  export function getBooksState(state$: Observable<State>) {
   return state$.select(state => state.books);
@@ -127,7 +128,7 @@ export function reducer(state: any, action: any) {
  * first select the books state then we pass the state to the book
  * reducer's getBooks selector, finally returning an observable
  * of search results.
- * 
+ *
  * Share memoizes the selector functions and published the result. This means
  * every time you call the selector, you will get back the same result
  * observable. Each subscription to the resultant observable

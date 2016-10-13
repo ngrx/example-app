@@ -8,7 +8,9 @@ books and add them to their collection. This application utilizes [@ngrx/db](htt
 to persist the collection across sessions; [@ngrx/store](https://github.com/ngrx/store) to manage 
 the state of the app and to cache requests made to the Google Books API; 
 [@angular/router](https://github.com/angular/angular) to manage navigation between routes; 
-and [@ngrx/effects](https://github.com/ngrx/effects) to isolate side effects.
+and [@ngrx/effects](https://github.com/ngrx/effects) to isolate side effects. 
+
+Built with [angular-cli](https://github.com/angular/angular-cli)
 
 ### Included
  - [ngrx/store](https://github.com/ngrx/store) - RxJS powered state management for Angular2 apps, inspired by Redux
@@ -24,14 +26,21 @@ and [@ngrx/effects](https://github.com/ngrx/effects) to isolate side effects.
 # clone the repo
 git clone https://github.com/ngrx/example-app.git
 
+
 # change directory to repo
 cd example-app
 
-# run npm install
+# Use npm or yarn to install the dependencies:
 npm install
 
+# OR
+yarn
+
 # start the server
-npm start
+ng serve
 ```
 
-Navigate to [http://localhost:8080/](http://localhost:8080/) in your browser
+Navigate to [http://localhost:4200/](http://localhost:4200/) in your browser
+
+_NOTE:_ The above setup instructions assume you have added local npm bin folders to your path. 
+If this is not the case you will need to install the angular-cli globally.
