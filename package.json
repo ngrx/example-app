@@ -4,8 +4,8 @@
   "description": "Example application demoing the @ngrx platform",
   "main": "index.ts",
   "scripts": {
-    "build": "webpack --env.prod",
-    "start": "webpack-dev-server"
+    "build": "ng build --prod",
+    "start": "ng serve"
   },
   "repository": {
     "type": "git",
