@@ -4,9 +4,11 @@ import { Pipe } from '@angular/core';
 @Pipe({ name: 'bcAddCommas' })
 export class AddCommasPipe {
   transform(authors: null | string[]) {
-    if (!authors) return '';
+    if (!authors) return 'Author Unknown';
 
     switch (authors.length) {
+      case 0:
+        return 'Author Unknown';
       case 1:
         return authors[0];
       case 2:
