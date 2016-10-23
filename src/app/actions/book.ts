@@ -50,7 +50,7 @@ export class SelectAction implements Action {
 }
 
 /**
- * Exxport a type alias of all actions in this action group
+ * Export a type alias of all actions in this action group
  * so that reducers can easily compose action types
  */
 export type Actions
