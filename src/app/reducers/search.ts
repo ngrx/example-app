@@ -1,5 +1,4 @@
-import '@ngrx/core/add/operator/select';
-import { Observable } from 'rxjs/Observable';
+import { createSelector } from 'reselect';
 import * as book from '../actions/book';
 
 
@@ -50,18 +49,9 @@ export function reducer(state = initialState, action: book.Actions): State {
   }
 }
 
-export function getStatus(state$: Observable<State>) {
-  return state$.select(state => state.loading);
-}
 
-export function getBookIds(state$: Observable<State>) {
-  return state$.select(state => state.ids);
-}
+export const getIds = (state: State) => state.ids;
 
-export function getQuery(state$: Observable<State>) {
-  return state$.select(state => state.query);
-}
+export const getQuery = (state: State) => state.query;
 
-export function getLoading(state$: Observable<State>) {
-  return state$.select(state => state.loading);
-}
+export const getLoading = (state: State) => state.loading;

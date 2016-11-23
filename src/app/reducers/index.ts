@@ -1,8 +1,4 @@
-import '@ngrx/core/add/operator/select';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/let';
-import { Observable } from 'rxjs/Observable';
-import { combineLatest } from 'rxjs/observable/combineLatest';
+import { createSelector } from 'reselect';
 import { ActionReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
@@ -94,30 +90,17 @@ export function reducer(state: any, action: any) {
  * returns a function that maps from the larger state tree into a smaller
  * piece of state. This selector simply selects the `books` state.
  *
- * Selectors are used with the `let` operator. They take an input observable
- * and return a new observable. Here's how you would use this selector:
+ * Selectors are used with the `select` operator.
  *
  * ```ts
  * class MyComponent {
  * 	constructor(state$: Observable<State>) {
- * 	  this.booksState$ = state$.let(getBooksState);
+ * 	  this.booksState$ = state$.select(getBooksState);
  * 	}
  * }
  * ```
- *
- * Note that this is equivalent to:
- * ```ts
- * class MyComponent {
- * 	constructor(state$: Observable<State>) {
- * 	  this.booksState$ = getBooksState(state$);
- * 	}
- * }
- * ```
- *
  */
- export function getBooksState(state$: Observable<State>) {
-  return state$.select(state => state.books);
-}
+export const getBooksState = (state: State) => state.books;
 
 /**
  * Every reducer module exports selector functions, however child reducers
@@ -134,67 +117,50 @@ export function reducer(state: any, action: any) {
  * observable. Each subscription to the resultant observable
  * is shared across all subscribers.
  */
- export const getBookEntities = compose(fromBooks.getBookEntities, getBooksState);
- export const getBookIds = compose(fromBooks.getBookIds, getBooksState);
- export const getSelectedBook = compose(fromBooks.getSelectedBook, getBooksState);
+ export const getBookEntities = createSelector(getBooksState, fromBooks.getEntities);
+ export const getBookIds = createSelector(getBooksState, fromBooks.getIds);
+ export const getSelectedBookId = createSelector(getBooksState, fromBooks.getSelectedId);
+ export const getSelectedBook = createSelector(getBooksState, fromBooks.getSelected);
 
 
 /**
  * Just like with the books selectors, we also have to compose the search
  * reducer's and collection reducer's selectors.
  */
-export function getSearchState(state$: Observable<State>) {
- return state$.select(s => s.search);
-}
+export const getSearchState = (state: State) => state.search;
 
-export const getSearchBookIds = compose(fromSearch.getBookIds, getSearchState);
-export const getSearchStatus = compose(fromSearch.getStatus, getSearchState);
-export const getSearchQuery = compose(fromSearch.getQuery, getSearchState);
-export const getSearchLoading = compose(fromSearch.getLoading, getSearchState);
+export const getSearchBookIds = createSelector(getSearchState, fromSearch.getIds);
+export const getSearchQuery = createSelector(getSearchState, fromSearch.getQuery);
+export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoading);
 
 
 /**
  * Some selector functions create joins across parts of state. This selector
  * composes the search result IDs to return an array of books in the store.
  */
-export const getSearchResults = function (state$: Observable<State>) {
-  return combineLatest<{ [id: string]: Book }, string[]>(
-    state$.let(getBookEntities),
-    state$.let(getSearchBookIds)
-  )
-  .map(([ entities, ids ]) => ids.map(id => entities[id]));
-};
+export const getSearchResults = createSelector(getBookEntities, getSearchBookIds, (books, searchIds) => {
+  return searchIds.map(id => books[id]);
+});
 
 
 
-export function getCollectionState(state$: Observable<State>) {
-  return state$.select(s => s.collection);
-}
+export const getCollectionState = (state: State) => state.collection;
 
-export const getCollectionLoaded = compose(fromCollection.getLoaded, getCollectionState);
-export const getCollectionLoading = compose(fromCollection.getLoading, getCollectionState);
-export const getCollectionBookIds = compose(fromCollection.getBookIds, getCollectionState);
+export const getCollectionLoaded = createSelector(getCollectionState, fromCollection.getLoaded);
+export const getCollectionLoading = createSelector(getCollectionState, fromCollection.getLoading);
+export const getCollectionBookIds = createSelector(getCollectionState, fromCollection.getIds);
 
-export const getBookCollection = function (state$: Observable<State>) {
-  return combineLatest<{ [id: string]: Book }, string[]>(
-    state$.let(getBookEntities),
-    state$.let(getCollectionBookIds)
-  )
-  .map(([ entities, ids ]) => ids.map(id => entities[id]));
-};
+export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
+  return ids.map(id => entities[id]);
+});
 
-export const isSelectedBookInCollection = function (state$: Observable<State>) {
-  return combineLatest<string[], Book>(
-    state$.let(getCollectionBookIds),
-    state$.let(getSelectedBook)
-  )
-  .map(([ ids, selectedBook ]) => ids.indexOf(selectedBook.id) > -1);
-};
+export const isSelectedBookInCollection = createSelector(getCollectionBookIds, getSelectedBookId, (ids, selected) => {
+  return ids.indexOf(selected) > -1;
+});
 
 /**
  * Layout Reducers
  */
-export const getLayoutState = (state$: Observable<State>) =>
-  state$.select(state => state.layout);
+export const getLayoutState = (state: State) => state.layout;
 
-export const getShowSidenav = compose(fromLayout.getShowSidenav, getLayoutState);
+export const getShowSidenav = createSelector(getLayoutState, fromLayout.getShowSidenav);

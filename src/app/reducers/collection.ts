@@ -1,6 +1,4 @@
-import '@ngrx/core/add/operator/select';
-import 'rxjs/add/operator/map';
-import { Observable } from 'rxjs/Observable';
+import { createSelector } from 'reselect';
 import * as collection from '../actions/collection';
 
 
@@ -63,14 +61,8 @@ export function reducer(state = initialState, action: collection.Actions): State
 }
 
 
-export function getLoaded(state$: Observable<State>) {
-  return state$.select(s => s.loaded);
-}
+export const getLoaded = (state: State) => state.loaded;
 
-export function getLoading(state$: Observable<State>) {
-  return state$.select(s => s.loading);
-}
+export const getLoading = (state: State) => state.loading;
 
-export function getBookIds(state$: Observable<State>) {
-  return state$.select(s => s.ids);
-}
+export const getIds = (state: State) => state.ids;
