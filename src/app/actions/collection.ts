@@ -39,7 +39,7 @@ export class AddBookFailAction implements Action {
 
 
 /**
- * Removje Book from Collection Actions
+ * Remove Book from Collection Actions
  */
 export class RemoveBookAction implements Action {
   type = ActionTypes.REMOVE_BOOK;
