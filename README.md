@@ -8,7 +8,7 @@ books and add them to their collection. This application utilizes [@ngrx/db](htt
 to persist the collection across sessions; [@ngrx/store](https://github.com/ngrx/store) to manage 
 the state of the app and to cache requests made to the Google Books API; 
 [@angular/router](https://github.com/angular/angular) to manage navigation between routes; 
-and [@ngrx/effects](https://github.com/ngrx/effects) to isolate side effects. 
+[@ngrx/effects](https://github.com/ngrx/effects) to isolate side effects. 
 
 Built with [angular-cli](https://github.com/angular/angular-cli)
 
