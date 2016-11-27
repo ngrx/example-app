@@ -129,7 +129,7 @@ export function reducer(state: any, action: any) {
  * reducer's getBooks selector, finally returning an observable
  * of search results.
  *
- * Share memoizes the selector functions and published the result. This means
+ * Share memoizes the selector functions and publishes the result. This means
  * every time you call the selector, you will get back the same result
  * observable. Each subscription to the resultant observable
  * is shared across all subscribers.
