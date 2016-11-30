@@ -34,6 +34,6 @@ export class CollectionPageComponent {
   books$: Observable<Book[]>;
 
   constructor(store: Store<fromRoot.State>) {
-    this.books$ = store.let(fromRoot.getBookCollection);
+    this.books$ = store.select(fromRoot.getBookCollection);
   }
 }

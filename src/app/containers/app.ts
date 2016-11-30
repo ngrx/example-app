@@ -33,13 +33,10 @@ export class AppComponent {
 
   constructor(private store: Store<fromRoot.State>) {
     /**
-     * Selectors can be applied with the `let` operator which passes the source
-     * observable to the provided function.
-     *
-     * More on `let`: https://gist.github.com/btroncone/d6cf141d6f2c00dc6b35#let
-     * More on selectors: https://gist.github.com/btroncone/a6e4347326749f938510#extracting-selectors-for-reuse
+     * Selectors can be applied with the `select` operator which passes the state
+     * tree to the provided selector
      */
-    this.showSidenav$ = this.store.let(fromRoot.getShowSidenav);
+    this.showSidenav$ = this.store.select(fromRoot.getShowSidenav);
   }
 
   closeSidenav() {

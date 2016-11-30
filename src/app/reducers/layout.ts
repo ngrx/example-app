@@ -1,5 +1,4 @@
-import '@ngrx/core/add/operator/select';
-import { Observable } from 'rxjs/Observable';
+import { createSelector } from 'reselect';
 import * as layout from '../actions/layout';
 
 
@@ -28,6 +27,4 @@ export function reducer(state = initialState, action: layout.Actions): State {
   }
 }
 
-export function getShowSidenav(state$: Observable<State>) {
-  return state$.select(state => state.showSidenav);
-}
+export const getShowSidenav = (state: State) => state.showSidenav;
