@@ -12,12 +12,12 @@ export class GoogleBooksService {
   constructor(private http: Http) {}
 
   searchBooks(queryTitle: string): Observable<Book[]> {
-    return this.http.get(`${this.API_PATH}?q=${queryTitle}`)
+    return this.http.get(`${this.API_PATH}?q=${queryTitle}&country=US`)
       .map(res => res.json().items || []);
   }
 
   retrieveBook(volumeId: string): Observable<Book> {
-    return this.http.get(`${this.API_PATH}/${volumeId}`)
+    return this.http.get(`${this.API_PATH}/${volumeId}&country=US`)
       .map(res => res.json());
   }
 }
