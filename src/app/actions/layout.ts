@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 import { type } from '../util';
 
-export const ActionTypes = new class {
-  readonly OPEN_SIDENAV =   type('[Layout] Open Sidenav')
-  readonly CLOSE_SIDENAV =  type('[Layout] Close Sidenav')
+export class ActionTypes  {
+  static readonly OPEN_SIDENAV =   type('[Layout] Open Sidenav')
+  static readonly CLOSE_SIDENAV =  type('[Layout] Close Sidenav')
 };
 
 

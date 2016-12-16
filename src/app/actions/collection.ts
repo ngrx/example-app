@@ -3,16 +3,16 @@ import { Book } from '../models/book';
 import { type } from '../util';
 
 
-export const ActionTypes = new class{
-  readonly ADD_BOOK =             type('[Collection] Add Book')
-  readonly ADD_BOOK_SUCCESS =     type('[Collection] Add Book Success')
-  readonly ADD_BOOK_FAIL =        type('[Collection] Add Book Fail')
-  readonly REMOVE_BOOK =          type('[Collection] Remove Book')
-  readonly REMOVE_BOOK_SUCCESS =  type('[Collection] Remove Book Success')
-  readonly REMOVE_BOOK_FAIL =     type('[Collection] Remove Book Fail')
-  readonly LOAD =                 type('[Collection] Load')
-  readonly LOAD_SUCCESS =         type('[Collection] Load Success')
-  readonly LOAD_FAIL =            type('[Collection] Load Fail')
+export class ActionTypes {
+  static readonly ADD_BOOK =             type('[Collection] Add Book')
+  static readonly ADD_BOOK_SUCCESS =     type('[Collection] Add Book Success')
+  static readonly ADD_BOOK_FAIL =        type('[Collection] Add Book Fail')
+  static readonly REMOVE_BOOK =          type('[Collection] Remove Book')
+  static readonly REMOVE_BOOK_SUCCESS =  type('[Collection] Remove Book Success')
+  static readonly REMOVE_BOOK_FAIL =     type('[Collection] Remove Book Fail')
+  static readonly LOAD =                 type('[Collection] Load')
+  static readonly LOAD_SUCCESS =         type('[Collection] Load Success')
+  static readonly LOAD_FAIL =            type('[Collection] Load Fail')
 };
 
 

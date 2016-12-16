@@ -10,11 +10,11 @@ import { type } from '../util';
  * literal types and runs a simple check to guarantee all
  * action types in the application are unique. 
  */
-export const ActionTypes = new class {
-  readonly SEARCH =           type('[Book] Search')
-  readonly SEARCH_COMPLETE =  type('[Book] Search Complete')
-  readonly LOAD =             type('[Book] Load')
-  readonly SELECT =           type('[Book] Select')
+export class ActionTypes {
+  static readonly SEARCH =           type('[Book] Search')
+  static readonly SEARCH_COMPLETE =  type('[Book] Search Complete')
+  static readonly LOAD =             type('[Book] Load')
+  static readonly SELECT =           type('[Book] Select')
 };
 
 
