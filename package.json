@@ -6,7 +6,8 @@
   "scripts": {
     "build": "ng build --prod",
     "start": "ng serve",
-    "test": "ng test"
+    "test": "ng test",
+    "ng": "ng"
   },
   "repository": {
     "type": "git",
