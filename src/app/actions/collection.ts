@@ -90,4 +90,4 @@ export type Actions
   | RemoveBookFailAction
   | LoadAction
   | LoadSuccessAction
-  | LoadFailAction
+  | LoadFailAction;

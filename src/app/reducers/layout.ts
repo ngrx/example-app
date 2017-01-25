@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 import * as layout from '../actions/layout';
 
 
