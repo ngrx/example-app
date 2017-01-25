@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect';
 import * as collection from '../actions/collection';
 
 

@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 import { EllipsisPipe } from './ellipsis';
 
 describe('Pipe: Ellipsis', () => {

@@ -30,9 +30,9 @@ describe('Service: GoogleBooks', () => {
   }));
 
   let data = {
-    "title": "Book Title",
-    "author": "John Smith",
-    "volumeId": "12345"
+    'title': 'Book Title',
+    'author': 'John Smith',
+    'volumeId': '12345'
   };
 
   let books = {

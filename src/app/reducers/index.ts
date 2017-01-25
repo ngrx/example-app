@@ -2,7 +2,6 @@ import { createSelector } from 'reselect';
 import { ActionReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
-import { Book } from '../models/book';
 
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
@@ -107,15 +106,10 @@ export const getBooksState = (state: State) => state.books;
  * have no knowledge of the overall state tree. To make them useable, we
  * need to make new selectors that wrap them.
  *
- * Once again our compose function comes in handy. From right to left, we
- * first select the books state then we pass the state to the book
- * reducer's getBooks selector, finally returning an observable
- * of search results.
- *
- * Share memoizes the selector functions and publishes the result. This means
- * every time you call the selector, you will get back the same result
- * observable. Each subscription to the resultant observable
- * is shared across all subscribers.
+ * The createSelector function from the reselect library creates
+ * very efficient selectors that are memoized and only recompute when arguments change.
+ * The created selectors can also be composed together to select different
+ * pieces of state.
  */
  export const getBookEntities = createSelector(getBooksState, fromBooks.getEntities);
  export const getBookIds = createSelector(getBooksState, fromBooks.getIds);
