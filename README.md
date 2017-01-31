@@ -13,12 +13,13 @@ the state of the app and to cache requests made to the Google Books API;
 Built with [angular-cli](https://github.com/angular/angular-cli)
 
 ### Included
- - [ngrx/store](https://github.com/ngrx/store) - RxJS powered state management for Angular2 apps, inspired by Redux
+ - [ngrx/store](https://github.com/ngrx/store) - RxJS powered state management for Angular apps, inspired by Redux
  - [ngrx/effects](https://github.com/ngrx/effects) - Side effect model for @ngrx/store
- - [angular/router](https://github.com/angular/angular) - Angular2 Component Router
- - [ngrx/db](https://github.com/ngrx/db) - RxJS powered IndexedDB for Angular2 apps
+ - [angular/router](https://github.com/angular/angular) - Angular Router
+ - [ngrx/db](https://github.com/ngrx/db) - RxJS powered IndexedDB for Angular apps
  - [ngrx/store-devtools](https://github.com/ngrx/store-devtools) - Instrumentation for @ngrx/store enabling time-travel debugging
  - [codewareio/ngrx-store-freeze](https://github.com/codewareio/ngrx-store-freeze) - A @ngrx/store meta reducer that prevents state from being mutated
+ - [reselect](https://github.com/reactjs/reselect) - Selector library for Redux
 
 ### Quick start
 
