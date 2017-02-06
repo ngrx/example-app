@@ -43,7 +43,7 @@ export class AppComponent {
     /**
      * All state updates are handled through dispatched actions in 'container'
      * components. This provides a clear, reproducible history of state
-     * updates and user interaction through the life of our 
+     * updates and user interaction through the life of our
      * application.
      */
     this.store.dispatch(new layout.CloseSidenavAction());

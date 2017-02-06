@@ -24,7 +24,7 @@ export class CollectionEffects {
    * This effect does not yield any actions back to the store. Set
    * `dispatch` to false to hint to @ngrx/effects that it should
    * ignore any elements of this effect stream.
-   * 
+   *
    * The `defer` observable accepts an observable factory function
    * that is called when the observable is subscribed to.
    * Wrapping the database open call in `defer` makes
