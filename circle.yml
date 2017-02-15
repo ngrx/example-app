@@ -4,4 +4,5 @@ machine:
 ## Customize test commands
 test:
   override:
+    - ng lint
     - ng test --watch false # single test run
