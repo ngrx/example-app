@@ -1,3 +1,5 @@
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { TestBed } from '@angular/core/testing';
 import { CollectionEffects } from './collection';
@@ -5,8 +7,6 @@ import { Database } from '@ngrx/db';
 import { Book } from '../models/book';
 import * as collection from '../actions/collection';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/Observable/of'
-import 'rxjs/add/Observable/throw'
 
 describe('CollectionEffects', () => {
   beforeEach(() => TestBed.configureTestingModule({

@@ -1,10 +1,10 @@
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BookEffects } from './book';
 import { GoogleBooksService } from '../services/google-books';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/Observable/of'
-import 'rxjs/add/Observable/throw'
 import { SearchAction, SearchCompleteAction } from '../actions/book';
 import { Book } from '../models/book';
 
