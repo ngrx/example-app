@@ -34,7 +34,7 @@ import { schema } from './db';
   imports: [
     CommonModule,
     BrowserModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     ComponentsModule,
     RouterModule.forRoot(routes, { useHash: true }),
 
