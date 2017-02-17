@@ -17,7 +17,7 @@ import { Book } from '../models/book';
       <md-card-footer class="footer">
         <bc-book-authors [book]="book"></bc-book-authors>
       </md-card-footer>
-      <md-card-actions align="end">
+      <md-card-actions align="start">
         <button md-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(book)">
         Remove Book from Collection
         </button>
@@ -38,8 +38,8 @@ import { Book } from '../models/book';
     md-card {
       max-width: 600px;
     }
-    md-card-title {
-      margin-left: 10px;
+    md-card-title-group {
+      margin-left: 0;
     }
     img {
       width: 60px;
@@ -47,15 +47,14 @@ import { Book } from '../models/book';
       margin-left: 5px;
     }
     md-card-content {
-      margin-top: 15px;
-      margin-bottom: 125px;
+      margin: 15px 0 50px;
     }
     md-card-actions {
-      margin-bottom: 0 !important;
-      margin-right: 0;
+      margin: 25px 0 0 !important;
     }
     md-card-footer {
       padding: 0 25px 25px;
+      position: relative;
     }
   `]
 })
