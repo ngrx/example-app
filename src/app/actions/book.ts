@@ -10,11 +10,11 @@ import { type } from '../util';
  * literal types and runs a simple check to guarantee all
  * action types in the application are unique.
  */
-export const ActionTypes = {
-  SEARCH:           type('[Book] Search'),
-  SEARCH_COMPLETE:  type('[Book] Search Complete'),
-  LOAD:             type('[Book] Load'),
-  SELECT:           type('[Book] Select'),
+export class ActionTypes {
+  static readonly SEARCH =           type('[Book] Search')
+  static readonly SEARCH_COMPLETE =  type('[Book] Search Complete')
+  static readonly LOAD =             type('[Book] Load')
+  static readonly SELECT =           type('[Book] Select')
 };
 
 
@@ -26,25 +26,25 @@ export const ActionTypes = {
  * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
 export class SearchAction implements Action {
-  type = ActionTypes.SEARCH;
+  readonly type = ActionTypes.SEARCH;
 
   constructor(public payload: string) { }
 }
 
 export class SearchCompleteAction implements Action {
-  type = ActionTypes.SEARCH_COMPLETE;
+  readonly type = ActionTypes.SEARCH_COMPLETE;
 
   constructor(public payload: Book[]) { }
 }
 
 export class LoadAction implements Action {
-  type = ActionTypes.LOAD;
+  readonly type = ActionTypes.LOAD;
 
   constructor(public payload: Book) { }
 }
 
 export class SelectAction implements Action {
-  type = ActionTypes.SELECT;
+  readonly type = ActionTypes.SELECT;
 
   constructor(public payload: string) { }
 }
