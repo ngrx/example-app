@@ -17,10 +17,13 @@ import * as book from '../actions/book';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
- * application. StateUpdates is an observable of the latest state and
- * dispatched action. The `toPayload` helper function returns just
+ * application. 
+ * Here `.map((action: book.SearchAction) => action.payload)` could be
+ * replaced with the `toPayload` helper function which returns just
  * the payload of the currently dispatched action, useful in
  * instances where the current state is not necessary.
+ * Documentation on `toPayload` can be found here:
+ * https://github.com/ngrx/effects/blob/master/docs/api.md#topayload
  *
  * If you are unfamiliar with the operators being used in these examples, please
  * check out the sources below:
