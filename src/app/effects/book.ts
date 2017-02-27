@@ -5,7 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/skip';
 import 'rxjs/add/operator/takeUntil';
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { empty } from 'rxjs/observable/empty';
@@ -17,11 +17,11 @@ import * as book from '../actions/book';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your
- * application. 
- * Here `.map((action: book.SearchAction) => action.payload)` could be
- * replaced with the `toPayload` helper function which returns just
+ * application.
+ * The `toPayload` helper function returns just
  * the payload of the currently dispatched action, useful in
  * instances where the current state is not necessary.
+ *
  * Documentation on `toPayload` can be found here:
  * https://github.com/ngrx/effects/blob/master/docs/api.md#topayload
  *
@@ -41,7 +41,7 @@ export class BookEffects {
   search$: Observable<Action> = this.actions$
     .ofType(book.ActionTypes.SEARCH)
     .debounceTime(300)
-    .map((action: book.SearchAction) => action.payload)
+    .map(toPayload)
     .switchMap(query => {
       if (query === '') {
         return empty();
