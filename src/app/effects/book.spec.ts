@@ -24,7 +24,9 @@ describe('BookEffects', () => {
 
   function setup(params?: {searchBooksReturnValue: any}) {
     const googleBooksService = TestBed.get(GoogleBooksService);
-    if (params) googleBooksService.searchBooks.and.returnValue(params.searchBooksReturnValue);
+    if (params) {
+      googleBooksService.searchBooks.and.returnValue(params.searchBooksReturnValue);
+    }
 
     return {
       runner: TestBed.get(EffectsRunner),

@@ -18,7 +18,6 @@ import { Book } from '../models/book';
 
 @Injectable()
 export class CollectionEffects {
-  constructor(private actions$: Actions, private db: Database) { }
 
   /**
    * This effect does not yield any actions back to the store. Set
@@ -70,4 +69,6 @@ export class CollectionEffects {
         .map(() => new collection.RemoveBookSuccessAction(book))
         .catch(() => of(new collection.RemoveBookFailAction(book)))
     );
+
+    constructor(private actions$: Actions, private db: Database) { }
 }

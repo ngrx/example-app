@@ -2,7 +2,7 @@ import { EllipsisPipe } from './ellipsis';
 
 describe('Pipe: Ellipsis', () => {
   let pipe: EllipsisPipe;
-  const longStr: string = `Lorem ipsum dolor sit amet,
+  const longStr = `Lorem ipsum dolor sit amet,
   consectetur adipisicing elit. Quibusdam ab similique, odio sit
   harum laborum rem, nesciunt atque iure a pariatur nam nihil dolore necessitatibus quos ea autem accusantium dolor
   voluptates voluptatibus. Doloribus libero, facilis ea nam

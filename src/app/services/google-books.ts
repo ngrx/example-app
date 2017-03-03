@@ -7,7 +7,7 @@ import { Book } from '../models/book';
 
 @Injectable()
 export class GoogleBooksService {
-  private API_PATH: string = 'https://www.googleapis.com/books/v1/volumes';
+  private API_PATH = 'https://www.googleapis.com/books/v1/volumes';
 
   constructor(private http: Http) {}
 

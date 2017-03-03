@@ -34,8 +34,6 @@ import * as book from '../actions/book';
 
 @Injectable()
 export class BookEffects {
-  constructor(private actions$: Actions, private googleBooks: GoogleBooksService) { }
-
 
   @Effect()
   search$: Observable<Action> = this.actions$
@@ -54,4 +52,6 @@ export class BookEffects {
         .map(books => new book.SearchCompleteAction(books))
         .catch(() => of(new book.SearchCompleteAction([])));
     });
+
+    constructor(private actions$: Actions, private googleBooks: GoogleBooksService) { }
 }
