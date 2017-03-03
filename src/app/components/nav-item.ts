@@ -17,8 +17,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   `]
 })
 export class NavItemComponent {
-  @Input() icon: string = '';
-  @Input() hint: string = '';
+  @Input() icon = '';
+  @Input() hint = '';
   @Input() routerLink: string | any[] = '/';
   @Output() activate = new EventEmitter();
 }

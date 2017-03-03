@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Example application demoing the @ngrx platform",
   "main": "index.ts",
-  "angular-cli": {},
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -51,11 +50,11 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
-    "@angular/cli": "1.0.0-beta.32.3",
+    "@angular/cli": "1.0.0-rc.0",
     "@angular/compiler-cli": "^2.4.0",
     "@types/jasmine": "2.5.38",
-    "@types/node": "^6.0.60",
-    "codelyzer": "~2.0.0-beta.4",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~2.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "karma": "~1.4.1",

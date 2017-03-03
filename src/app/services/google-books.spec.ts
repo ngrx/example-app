@@ -29,24 +29,24 @@ describe('Service: GoogleBooks', () => {
     backend = mockBackend;
   }));
 
-  let data = {
+  const data = {
     'title': 'Book Title',
     'author': 'John Smith',
     'volumeId': '12345'
   };
 
-  let books = {
+  const books = {
     items: [
       {id: '12345', volumeInfo: {title: 'Title'}},
       {id: '67890', volumeInfo: {title: 'Another Title'}}
     ]
   };
 
-  let queryTitle = 'Book Title';
+  const queryTitle = 'Book Title';
 
   it('should call the search api and return the search results', (done) => {
     backend.connections.subscribe((connection: MockConnection) => {
-      let options = new ResponseOptions({
+      const options = new ResponseOptions({
         body: JSON.stringify(books)
       });
       connection.mockRespond(new Response(options));
@@ -64,7 +64,7 @@ describe('Service: GoogleBooks', () => {
 
   it('should retrieve the book from the volumeId', (done) => {
     backend.connections.subscribe((connection: MockConnection) => {
-      let options = new ResponseOptions({
+      const options = new ResponseOptions({
         body: JSON.stringify(data)
       });
       connection.mockRespond(new Response(options));

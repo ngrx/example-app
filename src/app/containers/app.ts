@@ -8,7 +8,7 @@ import * as layout from '../actions/layout';
 
 
 @Component({
-  selector: 'book-collection-app',
+  selector: 'bc-app',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <bc-layout>

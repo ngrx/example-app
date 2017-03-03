@@ -47,7 +47,7 @@ import { Component, Output, Input, EventEmitter } from '@angular/core';
   `]
 })
 export class BookSearchComponent {
-  @Input() query: string = '';
+  @Input() query = '';
   @Input() searching = false;
   @Output() search = new EventEmitter<string>();
 }
