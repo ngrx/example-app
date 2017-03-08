@@ -93,6 +93,7 @@ export class BookDetailComponent {
   }
 
   get thumbnail() {
-    return this.book.volumeInfo.imageLinks.smallThumbnail;
+    return this.book.volumeInfo.imageLinks
+      && this.book.volumeInfo.imageLinks.smallThumbnail;
   }
 }
