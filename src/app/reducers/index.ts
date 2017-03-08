@@ -22,7 +22,7 @@ import { storeFreeze } from 'ngrx-store-freeze';
 
 /**
  * combineReducers is another useful metareducer that takes a map of reducer
- * functions and creates a new reducer that stores the gathers the values
+ * functions and creates a new reducer that gathers the values
  * of each reducer and stores them using the reducer's key. Think of it
  * almost like a database, where every reducer is a table in the db.
  *
