@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/ngrx/example-app#readme",
   "engines": {
-    "node": ">= 4.2.1",
-    "npm": ">= 3"
+    "node": ">= 6.9.0",
+    "npm": ">= 3.0.0"
   },
   "private": true,
   "dependencies": {
