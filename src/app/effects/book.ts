@@ -38,7 +38,6 @@ export class BookEffects {
   @Effect()
   search$: Observable<Action> = this.actions$
     .ofType(book.ActionTypes.SEARCH)
-    .debounceTime(300)
     .map(toPayload)
     .switchMap(query => {
       if (query === '') {
