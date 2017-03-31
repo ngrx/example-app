@@ -4,15 +4,15 @@ import { type } from '../util';
 
 
 export const ActionTypes = {
-  ADD_BOOK:             type('[Collection] Add Book'),
-  ADD_BOOK_SUCCESS:     type('[Collection] Add Book Success'),
-  ADD_BOOK_FAIL:        type('[Collection] Add Book Fail'),
-  REMOVE_BOOK:          type('[Collection] Remove Book'),
-  REMOVE_BOOK_SUCCESS:  type('[Collection] Remove Book Success'),
-  REMOVE_BOOK_FAIL:     type('[Collection] Remove Book Fail'),
-  LOAD:                 type('[Collection] Load'),
-  LOAD_SUCCESS:         type('[Collection] Load Success'),
-  LOAD_FAIL:            type('[Collection] Load Fail'),
+  ADD_BOOK:             type<'[Collection] Add Book'>('[Collection] Add Book'),
+  ADD_BOOK_SUCCESS:     type<'[Collection] Add Book Success'>('[Collection] Add Book Success'),
+  ADD_BOOK_FAIL:        type<'[Collection] Add Book Fail'>('[Collection] Add Book Fail'),
+  REMOVE_BOOK:          type<'[Collection] Remove Book'>('[Collection] Remove Book'),
+  REMOVE_BOOK_SUCCESS:  type<'[Collection] Remove Book Success'>('[Collection] Remove Book Success'),
+  REMOVE_BOOK_FAIL:     type<'[Collection] Remove Book Fail'>('[Collection] Remove Book Fail'),
+  LOAD:                 type<'[Collection] Load'>('[Collection] Load'),
+  LOAD_SUCCESS:         type<'[Collection] Load Success'>('[Collection] Load Success'),
+  LOAD_FAIL:            type<'[Collection] Load Fail'>('[Collection] Load Fail')
 };
 
 

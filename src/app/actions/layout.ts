@@ -2,8 +2,8 @@ import { Action } from '@ngrx/store';
 import { type } from '../util';
 
 export const ActionTypes = {
-  OPEN_SIDENAV:   type('[Layout] Open Sidenav'),
-  CLOSE_SIDENAV:  type('[Layout] Close Sidenav')
+  OPEN_SIDENAV:  type<'[Layout] Open Sidenav'>('[Layout] Open Sidenav'),
+  CLOSE_SIDENAV: type<'[Layout] Close Sidenav'>('[Layout] Close Sidenav')
 };
 
 

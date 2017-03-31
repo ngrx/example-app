@@ -11,10 +11,10 @@ import { type } from '../util';
  * action types in the application are unique.
  */
 export const ActionTypes = {
-  SEARCH:           type('[Book] Search'),
-  SEARCH_COMPLETE:  type('[Book] Search Complete'),
-  LOAD:             type('[Book] Load'),
-  SELECT:           type('[Book] Select'),
+  SEARCH:           type<'[Book] Search'>('[Book] Search'),
+  SEARCH_COMPLETE:  type<'[Book] Search Complete'>('[Book] Search Complete'),
+  LOAD:             type<'[Book] Load'>('[Book] Load'),
+  SELECT:           type<'[Book] Select'>('[Book] Select')
 };
 
 
