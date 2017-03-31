@@ -1,4 +1,4 @@
-#@ngrx example application
+# @ngrx example application
 
 Example application utilizing @ngrx libraries, showcasing common patterns and best practices.
 Take a look at the [live app](http://ngrx.github.io/example-app/).
