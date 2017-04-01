@@ -65,7 +65,7 @@ export class RemoveBookFailAction implements Action {
 export class LoadAction implements Action {
   type = ActionTypes.LOAD;
 
-  constructor() { }
+  constructor(public payload?: any) { }
 }
 
 export class LoadSuccessAction implements Action {

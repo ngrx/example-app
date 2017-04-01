@@ -1,4 +1,5 @@
 import * as book from '../actions/book';
+import { Book } from '../models/book';
 
 
 export interface State {
@@ -36,7 +37,7 @@ export function reducer(state = initialState, action: book.Actions): State {
       const books = action.payload;
 
       return {
-        ids: books.map(book => book.id),
+        ids: books.map((book: Book) => book.id),
         loading: false,
         query: state.query
       };
