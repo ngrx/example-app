@@ -21,9 +21,9 @@ export function reducer(state = initialState, action: book.Actions | collection.
     case book.ActionTypes.SEARCH_COMPLETE:
     case collection.ActionTypes.LOAD_SUCCESS: {
       const books = action.payload;
-      const newBooks = books.filter(book => !state.entities[book.id]);
+      const newBooks = books.filter((book: Book) => !state.entities[book.id]);
 
-      const newBookIds = newBooks.map(book => book.id);
+      const newBookIds = newBooks.map((book: Book) => book.id);
       const newBookEntities = newBooks.reduce((entities: { [id: string]: Book }, book: Book) => {
         return Object.assign(entities, {
           [book.id]: book
