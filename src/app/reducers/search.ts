@@ -15,7 +15,7 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: book.Actions): State {
   switch (action.type) {
-    case book.ActionTypes.SEARCH: {
+    case book.SEARCH: {
       const query = action.payload;
 
       if (query === '') {
@@ -32,7 +32,7 @@ export function reducer(state = initialState, action: book.Actions): State {
       });
     }
 
-    case book.ActionTypes.SEARCH_COMPLETE: {
+    case book.SEARCH_COMPLETE: {
       const books = action.payload;
 
       return {
