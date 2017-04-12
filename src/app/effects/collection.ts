@@ -40,7 +40,7 @@ export class CollectionEffects {
    */
   @Effect()
   loadCollection$: Observable<Action> = this.actions$
-    .ofType(collection.ActionTypes.LOAD)
+    .ofType(collection.LOAD)
     .startWith(new collection.LoadAction())
     .switchMap(() =>
       this.db.query('books')
@@ -51,7 +51,7 @@ export class CollectionEffects {
 
   @Effect()
   addBookToCollection$: Observable<Action> = this.actions$
-    .ofType(collection.ActionTypes.ADD_BOOK)
+    .ofType(collection.ADD_BOOK)
     .map((action: collection.AddBookAction) => action.payload)
     .mergeMap(book =>
       this.db.insert('books', [ book ])
@@ -62,7 +62,7 @@ export class CollectionEffects {
 
   @Effect()
   removeBookFromCollection$: Observable<Action> = this.actions$
-    .ofType(collection.ActionTypes.REMOVE_BOOK)
+    .ofType(collection.REMOVE_BOOK)
     .map((action: collection.RemoveBookAction) => action.payload)
     .mergeMap(book =>
       this.db.executeWrite('books', 'delete', [ book.id ])

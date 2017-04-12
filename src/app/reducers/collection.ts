@@ -15,13 +15,13 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: collection.Actions): State {
   switch (action.type) {
-    case collection.ActionTypes.LOAD: {
+    case collection.LOAD: {
       return Object.assign({}, state, {
         loading: true
       });
     }
 
-    case collection.ActionTypes.LOAD_SUCCESS: {
+    case collection.LOAD_SUCCESS: {
       const books = action.payload;
 
       return {
@@ -31,8 +31,8 @@ export function reducer(state = initialState, action: collection.Actions): State
       };
     }
 
-    case collection.ActionTypes.ADD_BOOK_SUCCESS:
-    case collection.ActionTypes.REMOVE_BOOK_FAIL: {
+    case collection.ADD_BOOK_SUCCESS:
+    case collection.REMOVE_BOOK_FAIL: {
       const book = action.payload;
 
       if (state.ids.indexOf(book.id) > -1) {
@@ -44,8 +44,8 @@ export function reducer(state = initialState, action: collection.Actions): State
       });
     }
 
-    case collection.ActionTypes.REMOVE_BOOK_SUCCESS:
-    case collection.ActionTypes.ADD_BOOK_FAIL: {
+    case collection.REMOVE_BOOK_SUCCESS:
+    case collection.ADD_BOOK_FAIL: {
       const book = action.payload;
 
       return Object.assign({}, state, {

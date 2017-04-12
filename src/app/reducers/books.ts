@@ -18,8 +18,8 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: book.Actions | collection.Actions): State {
   switch (action.type) {
-    case book.ActionTypes.SEARCH_COMPLETE:
-    case collection.ActionTypes.LOAD_SUCCESS: {
+    case book.SEARCH_COMPLETE:
+    case collection.LOAD_SUCCESS: {
       const books = action.payload;
       const newBooks = books.filter(book => !state.entities[book.id]);
 
@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: book.Actions | collection.
       };
     }
 
-    case book.ActionTypes.LOAD: {
+    case book.LOAD: {
       const book = action.payload;
 
       if (state.ids.indexOf(book.id) > -1) {
@@ -53,7 +53,7 @@ export function reducer(state = initialState, action: book.Actions | collection.
       };
     }
 
-    case book.ActionTypes.SELECT: {
+    case book.SELECT: {
       return {
         ids: state.ids,
         entities: state.entities,

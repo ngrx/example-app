@@ -1,38 +1,35 @@
 import { Action } from '@ngrx/store';
 import { Book } from '../models/book';
-import { type } from '../util';
 
 
-export const ActionTypes = {
-  ADD_BOOK:             type('[Collection] Add Book'),
-  ADD_BOOK_SUCCESS:     type('[Collection] Add Book Success'),
-  ADD_BOOK_FAIL:        type('[Collection] Add Book Fail'),
-  REMOVE_BOOK:          type('[Collection] Remove Book'),
-  REMOVE_BOOK_SUCCESS:  type('[Collection] Remove Book Success'),
-  REMOVE_BOOK_FAIL:     type('[Collection] Remove Book Fail'),
-  LOAD:                 type('[Collection] Load'),
-  LOAD_SUCCESS:         type('[Collection] Load Success'),
-  LOAD_FAIL:            type('[Collection] Load Fail'),
-};
+export const ADD_BOOK =             '[Collection] Add Book';
+export const ADD_BOOK_SUCCESS =     '[Collection] Add Book Success';
+export const ADD_BOOK_FAIL =        '[Collection] Add Book Fail';
+export const REMOVE_BOOK =          '[Collection] Remove Book';
+export const REMOVE_BOOK_SUCCESS =  '[Collection] Remove Book Success';
+export const REMOVE_BOOK_FAIL =     '[Collection] Remove Book Fail';
+export const LOAD =                 '[Collection] Load';
+export const LOAD_SUCCESS =         '[Collection] Load Success';
+export const LOAD_FAIL =            '[Collection] Load Fail';
 
 
 /**
  * Add Book to Collection Actions
  */
 export class AddBookAction implements Action {
-  type = ActionTypes.ADD_BOOK;
+  readonly type = ADD_BOOK;
 
   constructor(public payload: Book) { }
 }
 
 export class AddBookSuccessAction implements Action {
-  type = ActionTypes.ADD_BOOK_SUCCESS;
+  readonly type = ADD_BOOK_SUCCESS;
 
   constructor(public payload: Book) { }
 }
 
 export class AddBookFailAction implements Action {
-  type = ActionTypes.ADD_BOOK_FAIL;
+  readonly type = ADD_BOOK_FAIL;
 
   constructor(public payload: Book) { }
 }
@@ -42,40 +39,38 @@ export class AddBookFailAction implements Action {
  * Remove Book from Collection Actions
  */
 export class RemoveBookAction implements Action {
-  type = ActionTypes.REMOVE_BOOK;
+  readonly type = REMOVE_BOOK;
 
   constructor(public payload: Book) { }
 }
 
 export class RemoveBookSuccessAction implements Action {
-  type = ActionTypes.REMOVE_BOOK_SUCCESS;
+  readonly type = REMOVE_BOOK_SUCCESS;
 
   constructor(public payload: Book) { }
 }
 
 export class RemoveBookFailAction implements Action {
-  type = ActionTypes.REMOVE_BOOK_FAIL;
+  readonly type = REMOVE_BOOK_FAIL;
 
-  constructor(public payload: Book) { }
+  constructor(public payload: Book) {}
 }
 
 /**
  * Load Collection Actions
  */
 export class LoadAction implements Action {
-  type = ActionTypes.LOAD;
-
-  constructor() { }
+  readonly type = LOAD;
 }
 
 export class LoadSuccessAction implements Action {
-  type = ActionTypes.LOAD_SUCCESS;
+  readonly type = LOAD_SUCCESS;
 
   constructor(public payload: Book[]) { }
 }
 
 export class LoadFailAction implements Action {
-  type = ActionTypes.LOAD_FAIL;
+  readonly type = LOAD_FAIL;
 
   constructor(public payload: any) { }
 }
