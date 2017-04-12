@@ -1,6 +1,5 @@
 import { Action } from '@ngrx/store';
 import { Book } from '../models/book';
-import { EmptyAction } from './empty-action';
 
 
 export const ADD_BOOK =             '[Collection] Add Book';
@@ -60,7 +59,7 @@ export class RemoveBookFailAction implements Action {
 /**
  * Load Collection Actions
  */
-export class LoadAction extends EmptyAction {
+export class LoadAction implements Action {
   readonly type = LOAD;
 }
 

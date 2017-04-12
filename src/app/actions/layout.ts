@@ -1,14 +1,14 @@
-import { EmptyAction } from './empty-action';
+import { Action } from '@ngrx/store';
 
 export const OPEN_SIDENAV =   '[Layout] Open Sidenav';
 export const CLOSE_SIDENAV =  '[Layout] Close Sidenav';
 
 
-export class OpenSidenavAction extends EmptyAction {
+export class OpenSidenavAction implements Action {
   readonly type = OPEN_SIDENAV;
 }
 
-export class CloseSidenavAction extends EmptyAction {
+export class CloseSidenavAction implements Action {
   readonly type = CLOSE_SIDENAV;
 }
 
