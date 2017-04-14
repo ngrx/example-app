@@ -1,6 +1,7 @@
 import { NgModule, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
@@ -34,6 +35,7 @@ import { schema } from './db';
   imports: [
     CommonModule,
     BrowserModule,
+    BrowserAnimationsModule,
     MaterialModule,
     ComponentsModule,
     RouterModule.forRoot(routes, { useHash: true }),
