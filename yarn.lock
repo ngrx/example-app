@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@angular/animations@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.npmjs.org/@angular/animations/-/animations-4.0.2.tgz#79f6a77d8b6e19b2d1fd9fa175f78143cd689727"
+
 "@angular/cli@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmjs.org/@angular/cli/-/cli-1.0.0.tgz#7bfde1e7c5f28bf5bed4dda1352ee67ee887302f"
@@ -94,9 +98,9 @@
   version "4.0.2"
   resolved "https://registry.npmjs.org/@angular/http/-/http-4.0.2.tgz#8c61b9ff52748c5dcb52b57046829d34d66662ec"
 
-"@angular/material@2.0.0-beta.2":
-  version "2.0.0-beta.2"
-  resolved "https://registry.npmjs.org/@angular/material/-/material-2.0.0-beta.2.tgz#65ee8733990347b7518b7f42113e02e069dc109b"
+"@angular/material@2.0.0-beta.3":
+  version "2.0.0-beta.3"
+  resolved "https://registry.npmjs.org/@angular/material/-/material-2.0.0-beta.3.tgz#ec31dee61d7300ece28fee476852db236ded1e13"
 
 "@angular/platform-browser-dynamic@^4.0.2":
   version "4.0.2"
@@ -5128,16 +5132,9 @@ write-file-atomic@^1.1.2:
     imurmurhash "^0.1.4"
     slide "^1.1.5"
 
-ws@1.1.1:
+ws@1.1.1, ws@^1.0.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/ws/-/ws-1.1.1.tgz#082ddb6c641e85d4bb451f03d52f06eabdb1f018"
-  dependencies:
-    options ">=0.0.5"
-    ultron "1.0.x"
-
-ws@^1.0.1:
-  version "1.1.4"
-  resolved "https://registry.npmjs.org/ws/-/ws-1.1.4.tgz#57f40d036832e5f5055662a397c4de76ed66bf61"
   dependencies:
     options ">=0.0.5"
     ultron "1.0.x"
