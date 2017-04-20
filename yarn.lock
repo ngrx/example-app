@@ -124,25 +124,25 @@
   version "1.2.0"
   resolved "https://registry.npmjs.org/@ngrx/core/-/core-1.2.0.tgz#882b46abafa2e0e6d887cb71a1b2c2fa3e6d0dc6"
 
-"@ngrx/db@^2.0.0":
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/@ngrx/db/-/db-2.0.1.tgz#c14a2204ab34c587e41bb5c57411877f8f832183"
-
-"@ngrx/effects@^2.0.0":
+"@ngrx/db@^2.0.2":
   version "2.0.2"
-  resolved "https://registry.npmjs.org/@ngrx/effects/-/effects-2.0.2.tgz#8255e29cc0276f108784c90481e3b96e6713154b"
+  resolved "https://registry.yarnpkg.com/@ngrx/db/-/db-2.0.2.tgz#db3ddd2f60d605fc5e426be8845a00fa32e5873a"
 
-"@ngrx/router-store@^1.2.0":
-  version "1.2.5"
-  resolved "https://registry.npmjs.org/@ngrx/router-store/-/router-store-1.2.5.tgz#1cff82c5488fab995872c6f0d57a29a7ac91e598"
+"@ngrx/effects@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-2.0.3.tgz#e54ce340806dd91a81826796f13e2446aeeafb77"
+
+"@ngrx/router-store@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@ngrx/router-store/-/router-store-1.2.6.tgz#a2eb0ca515e9b367781f1030250dd64bb73c086b"
 
 "@ngrx/store-devtools@^3.2.0":
   version "3.2.4"
   resolved "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-3.2.4.tgz#2ce4d13bf34848a9e51ec87e3b125ed67b51e550"
 
-"@ngrx/store@^2.2.0":
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/@ngrx/store/-/store-2.2.1.tgz#316ec1e43aa5a0166e5e6e1aa2c34a4049386510"
+"@ngrx/store@^2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-2.2.2.tgz#a00305a6452032a3385886a11ce529dce2dae65b"
 
 "@ngtools/json-schema@1.0.5":
   version "1.0.5"
