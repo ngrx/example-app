@@ -51,7 +51,7 @@ describe('Service: GoogleBooks', () => {
       });
       connection.mockRespond(new Response(options));
       expect(connection.request.method).toEqual(RequestMethod.Get);
-      expect(connection.request.url).toEqual(`https://www.googleapis.com/books/v1/volumes?q=${queryTitle}`);
+      expect(connection.request.url).toEqual(`https://www.googleapis.com/books/v1/volumes?q=${queryTitle}&country=US`);
     });
 
     service
@@ -69,7 +69,7 @@ describe('Service: GoogleBooks', () => {
       });
       connection.mockRespond(new Response(options));
       expect(connection.request.method).toEqual(RequestMethod.Get);
-      expect(connection.request.url).toEqual(`https://www.googleapis.com/books/v1/volumes/${queryTitle}`);
+      expect(connection.request.url).toEqual(`https://www.googleapis.com/books/v1/volumes/${queryTitle}&country=US`);
     });
     service
       .retrieveBook(queryTitle)
