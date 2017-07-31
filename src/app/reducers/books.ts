@@ -8,7 +8,7 @@ export interface State {
   ids: string[];
   entities: { [id: string]: Book };
   selectedBookId: string | null;
-};
+}
 
 export const initialState: State = {
   ids: [],

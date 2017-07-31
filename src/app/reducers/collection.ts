@@ -5,7 +5,7 @@ export interface State {
   loaded: boolean;
   loading: boolean;
   ids: string[];
-};
+}
 
 const initialState: State = {
   loaded: false,

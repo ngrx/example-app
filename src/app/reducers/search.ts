@@ -5,7 +5,7 @@ export interface State {
   ids: string[];
   loading: boolean;
   query: string;
-};
+}
 
 const initialState: State = {
   ids: [],
