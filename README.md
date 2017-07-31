@@ -1,3 +1,8 @@
+---
+# This repository is for version 2.x of the example application.
+# [Click here for the latest version (4.x)](https://github.com/ngrx/platform)
+---
+
 # @ngrx example application
 
 Example application utilizing @ngrx libraries, showcasing common patterns and best practices.
