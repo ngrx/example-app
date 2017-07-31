@@ -98,9 +98,11 @@
   version "4.0.2"
   resolved "https://registry.npmjs.org/@angular/http/-/http-4.0.2.tgz#8c61b9ff52748c5dcb52b57046829d34d66662ec"
 
-"@angular/material@2.0.0-beta.3":
-  version "2.0.0-beta.3"
-  resolved "https://registry.npmjs.org/@angular/material/-/material-2.0.0-beta.3.tgz#ec31dee61d7300ece28fee476852db236ded1e13"
+"@angular/material@2.0.0-beta.7":
+  version "2.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-2.0.0-beta.7.tgz#2584aaf1ffbe24779916345f1ac82921ccbc2577"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/platform-browser-dynamic@^4.0.2":
   version "4.0.2"
@@ -4710,6 +4712,10 @@ tsickle@^0.21.0:
     mkdirp "^0.5.1"
     source-map "^0.5.6"
     source-map-support "^0.4.2"
+
+tslib@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
 
 tslint@~4.5.0:
   version "4.5.1"
