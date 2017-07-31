@@ -1,10 +1,11 @@
 import 'rxjs/add/operator/let';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../reducers';
 import { Book } from '../models/book';
+import * as collection from '../actions/collection';
 
 
 @Component({
@@ -30,10 +31,15 @@ import { Book } from '../models/book';
     }
   `]
 })
-export class CollectionPageComponent {
+export class CollectionPageComponent implements OnInit{
   books$: Observable<Book[]>;
 
-  constructor(store: Store<fromRoot.State>) {
-    this.books$ = store.select(fromRoot.getBookCollection);
+  constructor(private store: Store<fromRoot.State>) {
+    this.books$ = this.store.select(fromRoot.getBookCollection);
   }
+
+  ngOnInit() {
+    this.store.dispatch(new collection.LoadAction());
+  }
+
 }

@@ -41,7 +41,6 @@ export class CollectionEffects {
   @Effect()
   loadCollection$: Observable<Action> = this.actions$
     .ofType(collection.LOAD)
-    .startWith(new collection.LoadAction())
     .switchMap(() =>
       this.db.query('books')
         .toArray()
